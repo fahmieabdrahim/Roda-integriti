@@ -22,7 +22,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { 
-            background: url('https://media.canva.com/v2/image-resize/format:JPG/height:1371/quality:92/uri:ifs%3A%2F%2FM%2Fdc6d1356-a355-4ade-8d20-650bc54556ca/watermark:F/width:2400?csig=AAAAAAAAAAAAAAAAAAAAALjUBUzBONlqiFsxE2VCzVT_DN02zPXW69n4A4qECj-m&exp=1788903713&osig=AAAAAAAAAAAAAAAAAAAAAOHWtmYqWJbV-Y3-FqhmIoITzsylMkB2izeLndopBTif&signer=media-rpc&x-canva-quality=screen_3x');
+            background: url('https://img.magnific.com/premium-vector/bright-orange-yellow-rays-vector-background_322958-396.jpg?w=2000');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -62,13 +62,14 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            gap: 6px; 
-            margin-bottom: 6px; 
+            gap: 8px; 
+            margin-bottom: 8px; 
             width: 100%;
             text-align: center; 
         }
         
-        .logo { max-height: clamp(40px, 5.5vw, 65px); width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,215,0,0.6)); }
+        /* Saiz logo dibesarkan sedikit untuk telefon (minimum 55px) */
+        .logo { max-height: clamp(55px, 9vw, 75px); width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,215,0,0.6)); }
         
         .title-container {
             display: flex;
@@ -78,17 +79,18 @@
             width: 100%;
         }
 
+        /* Saiz tajuk dibesarkan sedikit untuk telefon (minimum 1.4rem) */
         h1 { 
             font-family: 'Rye', serif;
             color: #ffd700; 
-            font-size: clamp(1.2rem, 2.5vw, 1.9rem); 
+            font-size: clamp(1.4rem, 4vw, 2rem); 
             text-shadow: 0 0 10px rgba(0,0,0,0.8), 2px 2px 0px #8b0000; 
             font-weight: 400; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 1px; 
             text-transform: uppercase; 
-            margin-bottom: 2px; 
+            margin-bottom: 3px; 
         }
-        p { font-size: clamp(0.8rem, 1.5vw, 0.95rem); color: #fff; margin-bottom: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.9); padding: 0 10px; font-weight: 600; }
+        p { font-size: clamp(0.85rem, 2vw, 1rem); color: #fff; margin-bottom: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.9); padding: 0 10px; font-weight: 600; }
 
         .wheel-container { 
             position: relative; 
