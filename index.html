@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roda Integriti SPRM - Putar & Banteras</title>
+    <style>
+        :root {
+            --wheel-size: min(50vw, 50vh); 
+        }
+
+        @media (max-width: 768px) {
+            :root { --wheel-size: min(80vw, 80vh); }
+        }
+        @media (min-width: 1200px) {
+            :root { --wheel-size: min(45vw, 55vh); }
+        }
+        @media (min-width: 1800px) {
+            :root { --wheel-size: 650px; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { 
+            background: linear-gradient(rgba(26, 2, 5, 0.88), rgba(74, 13, 20, 0.88)), url('https://img.magnific.com/premium-vector/circus-carnival-template-swirl-stripes-old-texture-retro-cinema-sign-background_44769-1652.jpg?w=2000');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; overflow-x: hidden; 
+        }
+
+        /* Ikon Tetapan di Kanan Atas */
+        .settings-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 90;
+            background: rgba(59, 10, 16, 0.9);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: 0.3s;
+        }
+        .settings-icon:hover {
+            transform: scale(1.1) rotate(45deg);
+            background: #ffd700;
+            color: #3b0a10;
+        }
+        
+        .main-layout { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 900px; text-align: center; }
+
+        .logo-area { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+            width: 100%;
+            text-align: center; 
+        }
+        
+        .logo { max-height: clamp(60px, 8vw, 100px); width: auto; object-fit: contain; filter: drop-shadow(0 0 12px rgba(255,215,0,0.6)); }
+        
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 { color: #ffd700; font-size: clamp(1.8rem, 4vw, 3rem); text-shadow: 0 0 12px rgba(0,0,0,0.8); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+        p { font-size: clamp(0.95rem, 2vw, 1.2rem); color: #f5e1e3; margin-bottom: 20px; text-shadow: 0 1px 3px rgba(0,0,0,0.8); padding: 0 10px; }
+
+        .wheel-container { 
+            position: relative; 
+            display: inline-block; 
+            margin: 35px 0 25px 0; 
+            width: var(--wheel-size); 
+            height: var(--wheel-size); 
+        }
+        
+        .pointer { 
+            width: 0; height: 0; 
+            border-left: calc(var(--wheel-size) * 0.05) solid transparent; 
+            border-right: calc(var(--wheel-size) * 0.05) solid transparent; 
+            border-top: calc(var(--wheel-size) * 0.1) solid #d4af37; 
+            position: absolute; top: calc(var(--wheel-size) * -0.03); left: 50%; 
+            transform: translateX(-50%); z-index: 20; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.8)); 
+        }
+        .pointer::after {
+            content: ''; position: absolute; top: calc(var(--wheel-size) * -0.1); left: calc(var(--wheel-size) * -0.025);
+            width: calc(var(--wheel-size) * 0.05); height: calc(var(--wheel-size) * 0.05); background: #8b0000; border-radius: 50%;
+            border: 2px solid #ffd700;
+        }
+
+        canvas { 
+            width: 100%; 
+            height: 100%; 
+            display: block; 
+        }
+
+        .btn-main { 
+            background: linear-gradient(135deg, #ffd700, #e67e22); 
+            color: #230408; border: none; padding: clamp(14px, 2vw, 18px) clamp(30px, 5vw, 60px); font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: bold; 
+            border-radius: 50px; cursor: pointer; transition: 0.3s; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6); width: 100%; max-width: 450px; 
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+        .btn-main:hover { transform: scale(1.04); background: linear-gradient(135deg, #ffed4a, #d35400); }
+        .btn-main:disabled { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,2,5,0.92); justify-content: center; align-items: center; z-index: 100; padding: 20px; backdrop-filter: blur(5px); }
+        .modal-content { background: #3b0a10; padding: clamp(25px, 3vw, 35px); border-radius: 24px; width: 100%; max-width: 500px; text-align: center; border: 2px solid #ffd700; box-shadow: 0 15px 40px rgba(0,0,0,0.8); animation: popIn 0.3s ease; position: relative; overflow: hidden; }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        
+        .quiz-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 14px; border-left: 5px solid #ffd700; text-align: left; margin-bottom: 20px; }
+        .answers-grid { display: flex; gap: 15px; }
+        .ans-btn { flex: 1; padding: 15px; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: 0.2s; }
+        .ans-btn:hover { transform: translateY(-3px); }
+
+        /* Pilihan Mode dalam Settings */
+        .mode-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            text-align: left;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .mode-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            padding: 12px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mode-card:hover {
+            border-color: #ffd700;
+            background: rgba(212, 175, 55, 0.1);
+        }
+        .mode-card.active {
+            border-color: #ffd700;
+            background: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+        .mode-card h4 { color: #ffd700; font-size: 1rem; margin-bottom: 3px; }
+        .mode-card p { font-size: 0.8rem; color: #f5e1e3; margin: 0; }
+        .mode-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .mode-card.active .mode-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffd700;
+            animation: fall 1.2s ease-out forwards;
+            z-index: 10;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- IKON TETAPAN DI KANAN ATAS -->
+<div class="settings-icon" onclick="openSettingsModal()" title="Tetapan Mod Soalan">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+</div>
+
+<div class="main-layout">
+    <div class="logo-area">
+        <img src="https://www.sprm.gov.my/admin/files/sprm/assets/images/sprm/artikel-korporat/logo/Logo-SPRM.png" alt="Logo SPRM" class="logo">
+        <div class="title-container">
+            <h1>PUTAR & BANTERAS RASUAH</h1>
+        </div>
+    </div>
+
+    <!-- PAPARAN UTAMA -->
+    <div id="section-wheel-main" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <p>Putar untuk tentukan hadiah dan jawab soalan integriti!</p>
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <canvas id="wheel" width="500" height="500"></canvas>
+        </div>
+        <button id="spin-action-btn" class="btn-main" onclick="spinWheelAction()">PUTAR RODA SEKARANG</button>
+    </div>
+</div>
+
+<!-- MODAL TETAPAN MOD SOALAN -->
+<div id="modal-settings" class="modal">
+    <div class="modal-content">
+        <h2 style="color:#ffd700; margin-bottom:10px; font-size: 1.5rem;">TETAPAN KATEGORI SOALAN</h2>
+        <p style="font-size: 0.95rem; color:#f5e1e3; margin-bottom:15px;">Pilih sasaran kumpulan pameran atau audiens anda:</p>
+        
+        <div class="mode-options">
+            <div class="mode-card" id="card-pelajar" onclick="selectMode('pelajar')">
+                <div>
+                    <h4>a. Pelajar (Sekolah / Universiti)</h4>
+                    <p>Soalan berkaitan disiplin sekolah, anti-buli, jujur peperiksaan & sahsiah.</p>
+                </div>
+                <div class="mode-radio"></div>
+            </div>
+
+            <div class="mode-card" id="card-penjawat_awam" onclick="selectMode('penjawat_awam')">
+                <div>
+                    <h4>b. Penjawat Awam</h4>
+                    <p>Soalan berkaitan integriti perkhidmatan awam, perolehan, tatakelakuan & hadiah.</p>
+                </div>
+                <div class="mode-radio"></div>
+            </div>
+            
+            <div class="mode-card" id="card-awam" onclick="selectMode('awam')">
+                <div>
+                    <h4>c. Orang Awam / Sektor Swasta</h4>
+                    <p>Soalan berkaitan liabiliti korporat, perniagaan, aduan SPRM & masyarakat.</p>
+                </div>
+                <div class="mode-radio"></div>
+            </div>
+        </div>
+
+        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem;" onclick="saveSettings()">SIMPAN & GUNA</button>
+    </div>
+</div>
+
+<!-- POPUP SOALAN YA / TIDAK -->
+<div id="modal-quiz" class="modal">
+    <div class="modal-content">
+        <h2 style="color:#ffd700; margin-bottom:12px; font-size: 1.6rem;">UJIAN MINDA INTEGRITI</h2>
+        <div class="quiz-box">
+            <h3 id="segment-title" style="color:#ff4757; margin-bottom:8px; font-size:1.1rem;">Hadiah</h3>
+            <p id="question-text" style="font-size: 1.15rem; color:#fff; margin-bottom:0; line-height: 1.4;">Soalan...</p>
+        </div>
+        <p style="font-size:0.95rem; color:#f5e1e3; margin-bottom: 15px;">Pilih jawapan anda di bawah:</p>
+        <div class="answers-grid">
+            <button class="ans-btn" style="background:#2ed573;" onclick="checkAnswer('Ya')">YA</button>
+            <button class="ans-btn" style="background:#ff4757;" onclick="checkAnswer('Tidak')">TIDAK</button>
+        </div>
+    </div>
+</div>
+
+<!-- SKRIN MENANG (BETUL) -->
+<div id="modal-prize" class="modal">
+    <div class="modal-content" id="prize-modal-content">
+        <h2 style="color: #2ed573; margin-bottom:12px; font-size: 1.8rem;">🎉 TAHNIAH! ANDA MENANG!</h2>
+        <p style="font-size:1.05rem; color:#f5e1e3;">Jawapan anda tepat. Tunjukkan skrin ini kepada petugas di reruai SPRM.</p>
+        <div style="background: rgba(0,0,0,0.4); border: 2px dashed #ffd700; padding: 20px; border-radius: 12px; margin: 20px 0;">
+            <h3 id="prize-won" style="color:#ffd700; font-size:1.5rem;">Hadiah</h3>
+        </div>
+        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem;" onclick="resetGame()">SELESAI / SETERUSNYA</button>
+    </div>
+</div>
+
+<!-- SKRIN CUBA LAGI (SALAH) -->
+<div id="modal-fail" class="modal">
+    <div class="modal-content">
+        <h2 style="color: #ff4757; margin-bottom:12px; font-size: 1.8rem;">❌ CUBA LAGI!</h2>
+        <p style="font-size:1.05rem; color:#f5e1e3; margin-bottom:25px; line-height: 1.4;">Maaf, jawapan anda kurang tepat. Terima kasih kerana menyokong kempen integriti SPRM!</p>
+        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem; background:#444;" onclick="resetGame()">SELESAI / SETERUSNYA</button>
+    </div>
+</div>
+
+<script>
+    // Bank Soalan Terperinci (3 Mod: Pelajar, Penjawat Awam, Orang Awam)
+    const questionsDatabase = {
+        pelajar: [
+            { q: "Adakah perbuatan meniru dalam peperiksaan dikira langkah awal salah laku integriti?", a: "Ya" },
+            { q: "Adakah pelajar bertanggungjawab menolak budaya memberi hadiah rasuah kepada guru untuk markah?", a: "Ya" },
+            { q: "Adakah mengambil barang rakan sekelas tanpa kebenaran dikira amalan integriti yang baik?", a: "Tidak" },
+            { q: "Adakah ponteng sekolah dan memalsukan surat ibu bapa menunjukkan nilai integriti yang tinggi?", a: "Tidak" },
+            { q: "Adakah membuli rakan di sekolah melanggar prinsip integriti dan nilai murni?", a: "Ya" },
+            { q: "Adakah melaporkan salah laku vandalisme di sekolah kepada guru merupakan tindakan yang berintegriti?", a: "Ya" },
+            { q: "Adakah menipu nama semasa ditangkap pengawas sekolah satu kesalahan disiplin dan integriti?", a: "Ya" },
+            { q: "Adakah pelajar perlu jujur dalam menyiapkan kerja sekolah sendiri tanpa meniru tugasan orang lain?", a: "Ya" },
+            { q: "Adakah meminta wang perlindungan daripada pelajar lain di sekolah dikira sebagai salah laku rasuah?", a: "Ya" },
+            { q: "Adakah menjaga harta benda sekolah dengan baik mencerminkan sahsiah dan integriti pelajar?", a: "Ya" },
+            { q: "Adakah menyembunyikan kesalahan rakan yang merosakkan harta benda sekolah merupakan tindakan betul?", a: "Tidak" },
+            { q: "Adakah ketua kelas patut menerima suapan untuk mengelak daripada melaporkan pelajar yang bising?", a: "Tidak" },
+            { q: "Adakah aktiviti kelab pencegahan rasuah di sekolah penting untuk membina generasi berintegriti?", a: "Ya" },
+            { q: "Adakah memalsukan tandatangan ibu bapa pada buku laporan kemajuan sekolah dikira perbuatan jujur?", a: "Tidak" },
+            { q: "Adakah berbohong kepada guru tentang sebab ketidakhadiran ke sekolah satu amalan integriti?", a: "Tidak" }
+        ],
+        penjawat_awam: [
+            { q: "Adakah penjawat awam wajib membuat pengisytiharan harta kepada ketua jabatan mengikut peraturan semasa?", a: "Ya" },
+            { q: "Adakah pegawai kerajaan dibenarkan menerima hadiah bernilai tinggi daripada pihak yang mempunyai urusan rasmi?", a: "Tidak" },
+            { q: "Adakah perbuatan meminta atau menerima balasan wang bagi meluluskan projek kerajaan dikira kesalahan rasuah?", a: "Ya" },
+            { q: "Adakah konflik kepentingan berlaku apabila pegawai meluluskan tender kepada syarikat ahli keluarga sendiri?", a: "Ya" },
+            { q: "Adakah penjawat awam perlu melaporkan sebarang tawaran suapan kepada SPRM dengan segera?", a: "Ya" },
+            { q: "Adakah lewat hadir bertugas tanpa alasan munasabah dikira mencabuli etika integriti perkhidmatan awam?", a: "Ya" },
+            { q: "Adakah membocorkan maklumat rasmi kerajaan kepada pihak luar demi kepentingan peribadi dibenarkan?", a: "Tidak" },
+            { q: "Adakah penggunaan kenderaan pejabat untuk urusan peribadi tanpa kebenaran dikira salah guna kuasa?", a: "Ya" },
+            { q: "Adakah amalan rasuah, penyelewengan dan salah guna kuasa boleh meruntuhkan imej pentadbiran negara?", a: "Ya" },
+            { q: "Adakah pegawai awam patut mengutamakan kepentingan awam berbanding kepentingan diri atau keluarga?", a: "Ya" },
+            { q: "Adakah menerima tajaan percutian mewah daripada kontraktor projek jabatan merupakan amalan yang betul?", a: "Tidak" },
+            { q: "Adakah cuti sakit palsu yang dikemukakan oleh kakitangan awam melanggar ikrar integriti perkhidmatan?", a: "Ya" },
+            { q: "Adakah ketelusan dalam urusan perolehan kerajaan penting untuk mengelakkan ketirisan wang rakyat?", a: "Ya" },
+            { q: "Adakah bersubahat menutup salah laku rakan sekerja satu tindakan yang berintegriti?", a: "Tidak" },
+            { q: "Adakah Ikrar Integriti Perkhidmatan Awam (IIPA) wajib dihayati dan diamalkan oleh setiap penjawat awam?", a: "Ya" }
+        ],
+        awam: [
+            { q: "Adakah syarikat swasta boleh didakwa jika pekerja memberi suapan atas nama syarikat (Liabiliti Korporat)?", a: "Ya" },
+            { q: "Adakah aduan rasuah boleh dibuat secara rahsia melalui portal rasmi atau saluran aduan SPRM?", a: "Ya" },
+            { q: "Adakah memberi duit kopi kepada penguat kuasa untuk meloloskan diri daripada saman dikira rasuah?", a: "Ya" },
+            { q: "Adakah kontraktor swasta boleh menggunakan kabel dalaman untuk memenangi tender kerajaan tanpa telus?", a: "Tidak" },
+            { q: "Adakah pekerja swasta wajib menolak hadiah lumayan daripada pembekal yang mempunyai konflik kepentingan?", a: "Ya" },
+            { q: "Adakah masyarakat awam mempunyai tanggungjawab moral untuk melaporkan aktiviti rasuah di sekeliling?", a: "Ya" },
+            { q: "Adakah menerima komisen tersembunyi daripada pihak ketiga tanpa pengetahuan majikan sah di sisi undang-undang?", a: "Tidak" },
+            { q: "Adakah penipuan tuntutan bayaran (claims) dalam sektor swasta merupakan satu bentuk jenayah rasuah?", a: "Ya" },
+            { q: "Adakah pemberi maklumat (whistleblower) dilindungi di bawah undang-undang perlindungan saksi di Malaysia?", a: "Ya" },
+            { q: "Adakah memalsukan dokumen kewangan syarikat untuk mendapatkan pinjaman bank dikira amalan berintegriti?", a: "Tidak" },
+            { q: "Adakah perbuatan memeras ugut wang perlindungan daripada peniaga kecil oleh pihak luar sah di sisi undang-undang?", a: "Tidak" },
+            { q: "Adakah mengamalkan sikap pilih kasih dalam urusan perniagaan dengan pelanggan dibenarkan?", a: "Tidak" },
+            { q: "Adakah ketelusan dalam pentadbiran syarikat swasta membantu mencegah salah laku kewangan?", a: "Ya" },
+            { q: "Adakah hadiah berbentuk keraian perniagaan yang terlalu mewah dan boleh mempengaruhi keputusan dikira salah?", a: "Ya" },
+            { q: "Adakah rakyat Malaysia perlu bersama-sama menolak budaya rasuah demi kesejahteraan ekonomi negara?", a: "Ya" }
+        ]
+    };
+
+    let activeMode = 'pelajar';
+    let tempSelectedMode = 'pelajar';
+    let selectedPrize = '';
+    let currentCorrectAnswer = 'Ya';
+
+    let audioCtx = null;
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    }
+
+    function playTickSound() {
+        initAudio();
+        if (!audioCtx) return;
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.04);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        } catch(e) {}
+    }
+
+    function playWinSound() {
+        initAudio();
+        if (!audioCtx) return;
+        try {
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((note, index) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(note, audioCtx.currentTime + index * 0.12);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime + index * 0.12);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.25);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(audioCtx.currentTime + index * 0.12);
+                osc.stop(audioCtx.currentTime + index * 0.12 + 0.25);
+            });
+        } catch(e) {}
+    }
+
+    const sectors = [
+        { line1: "HADIAH", line2: "UTAMA" },
+        { line1: "BOTOL AIR", line2: "SPRM" },
+        { line1: "NOTA &", line2: "PEN" },
+        { line1: "CENDERAHATI", line2: "EKSKLUSIF" },
+        { line1: "SAGUHATI", line2: "MISTERI" },
+        { line1: "KIT", line2: "INTEGRITI" }
+    ];
+    
+    const colors = ["#b30000", "#d4af37", "#8b0000", "#e6c65c", "#990000", "#ffd700"];
+    
+    let startAngle = 0;
+    let isSpinning = false;
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const arc = Math.PI / (sectors.length / 2);
+
+    function drawWheel() {
+        ctx.clearRect(0, 0, 500, 500);
+        
+        const centerX = 250;
+        const centerY = 250;
+        const outerRadius = 240;
+        const wheelRadius = 210;
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "#66000c";
+        ctx.fill();
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = "#ffd700";
+        ctx.stroke();
+
+        const numBulbs = 16;
+        for (let i = 0; i < numBulbs; i++) {
+            const angle = (i * 2 * Math.PI) / numBulbs;
+            const bulbX = centerX + (outerRadius - 12) * Math.cos(angle);
+            const bulbY = centerY + (outerRadius - 12) * Math.sin(angle);
+            
+            ctx.beginPath();
+            ctx.arc(bulbX, bulbY, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = (i % 2 === 0) ? "#ffffff" : "#ffe600";
+            ctx.fill();
+        }
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle);
+
+        for (let i = 0; i < sectors.length; i++) {
+            const angle = i * arc;
+            
+            ctx.fillStyle = colors[i % colors.length];
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.arc(0, 0, wheelRadius, angle, angle + arc, false);
+            ctx.lineTo(0, 0);
+            ctx.fill();
+            
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.save();
+            ctx.fillStyle = "#fff";
+            ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+            ctx.shadowBlur = 5;
+            ctx.translate(Math.cos(angle + arc / 2) * 125, Math.sin(angle + arc / 2) * 125);
+            ctx.rotate(angle + arc / 2 + Math.PI / 2);
+            ctx.font = "bold 16px 'Segoe UI', Tahoma, sans-serif";
+            
+            ctx.fillText(sectors[i].line1, -ctx.measureText(sectors[i].line1).width / 2, -6);
+            ctx.fillText(sectors[i].line2, -ctx.measureText(sectors[i].line2).width / 2, 14);
+            
+            ctx.restore();
+        }
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 32, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffd700";
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#8b0000";
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 18, 0, 2 * Math.PI);
+        ctx.fillStyle = "#b30000";
+        ctx.fill();
+        ctx.strokeStyle = "#ffd700";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    // Fungsi Tetapan Mod
+    function openSettingsModal() {
+        tempSelectedMode = activeMode;
+        updateSettingsCardUI();
+        document.getElementById('modal-settings').style.display = 'flex';
+    }
+
+    function selectMode(mode) {
+        tempSelectedMode = mode;
+        updateSettingsCardUI();
+    }
+
+    function updateSettingsCardUI() {
+        ['pelajar', 'penjawat_awam', 'awam'].forEach(m => {
+            const card = document.getElementById(`card-${m}`);
+            if (m === tempSelectedMode) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        });
+    }
+
+    function saveSettings() {
+        activeMode = tempSelectedMode;
+        document.getElementById('modal-settings').style.display = 'none';
+    }
+
+    function spinWheelAction() {
+        if(isSpinning) return;
+        isSpinning = true;
+        document.getElementById('spin-action-btn').disabled = true;
+
+        const targetIndex = Math.floor(Math.random() * sectors.length);
+        selectedPrize = `${sectors[targetIndex].line1} ${sectors[targetIndex].line2}`;
+
+        const extraSpins = 6 * 2 * Math.PI;
+        const targetCenterAngle = targetIndex * arc + arc / 2;
+        const desiredFinalAngle = -Math.PI / 2 - targetCenterAngle + extraSpins;
+        
+        const initialAngle = startAngle;
+        const totalRotationNeeded = desiredFinalAngle - (initialAngle % (2 * Math.PI)) + extraSpins;
+        const finalAngle = initialAngle + totalRotationNeeded;
+
+        let startTime = null;
+        const duration = 4000;
+        let lastSegmentCheck = 0;
+
+        function animate(time) {
+            if(!startTime) startTime = time;
+            const progress = Math.min((time - startTime) / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            startAngle = initialAngle + (totalRotationNeeded * easeOut);
+            
+            let currentSegment = Math.floor((startAngle % (2 * Math.PI)) / arc);
+            if (currentSegment !== lastSegmentCheck) {
+                playTickSound();
+                lastSegmentCheck = currentSegment;
+            }
+
+            drawWheel();
+
+            if(progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                isSpinning = false;
+                startAngle = finalAngle;
+                drawWheel();
+
+                const mainBtn = document.getElementById('spin-action-btn');
+                mainBtn.disabled = false;
+                mainBtn.innerText = "JAWAB SOALAN";
+                mainBtn.setAttribute('onclick', 'openQuizModal()');
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    function openQuizModal() {
+        const questionsList = questionsDatabase[activeMode];
+        const currentQ = questionsList[Math.floor(Math.random() * questionsList.length)];
+        currentCorrectAnswer = currentQ.a;
+
+        document.getElementById('segment-title').innerText = `Hadiah Bertuah: ${selectedPrize}`;
+        document.getElementById('question-text').innerText = currentQ.q;
+        
+        document.getElementById('modal-quiz').style.display = 'flex';
+    }
+
+    function triggerSurpriseConfetti() {
+        const container = document.getElementById('prize-modal-content');
+        for (let i = 0; i < 35; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}%`;
+            confetti.style.top = `${Math.random() * 30}%`;
+            confetti.style.backgroundColor = ['#ffd700', '#ff4757', '#2ed573', '#ffffff'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDuration = `${Math.random() * 0.8 + 0.6}s`;
+            container.appendChild(confetti);
+
+            setTimeout(() => { confetti.remove(); }, 1400);
+        }
+    }
+
+    function checkAnswer(ans) {
+        document.getElementById('modal-quiz').style.display = 'none';
+
+        if(ans === currentCorrectAnswer) {
+            document.getElementById('prize-won').innerText = `${selectedPrize}`;
+            document.getElementById('modal-prize').style.display = 'flex';
+            playWinSound();
+            triggerSurpriseConfetti();
+        } else {
+            document.getElementById('modal-fail').style.display = 'flex';
+        }
+    }
+
+    function resetGame() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+        
+        const mainBtn = document.getElementById('spin-action-btn');
+        mainBtn.innerText = "PUTAR RODA SEKARANG";
+        mainBtn.setAttribute('onclick', 'spinWheelAction()');
+    }
+
+    drawWheel();
+</script>
+</body>
+</html>
