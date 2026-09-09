@@ -7,52 +7,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
     <style>
         :root {
-            --wheel-size: min(48vw, 48vh); 
+            --wheel-size: min(46vw, 46vh); 
         }
 
         @media (max-width: 768px) {
-            :root { --wheel-size: min(78vw, 78vh); }
+            :root { --wheel-size: min(74vw, 74vh); }
         }
         @media (min-width: 1200px) {
-            :root { --wheel-size: min(42vw, 50vh); }
+            :root { --wheel-size: min(40vw, 48vh); }
         }
         @media (min-width: 1800px) {
-            :root { --wheel-size: 600px; }
+            :root { --wheel-size: 560px; }
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { 
-            background: url('https://i.postimg.cc/513d1BJZ/Background.jpg');
+            background: url('https://i.postimg.cc/knGkWDLf/Background.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px; overflow-x: hidden; 
+            color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px 15px 50px 15px; overflow-x: hidden; 
         }
 
-        /* Ikon Tetapan di Kanan Bawah */
         .settings-icon {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
             z-index: 90;
-            background: rgba(59, 10, 16, 0.9);
-            border: 2px solid #ffd700;
+            background: transparent;
+            border: none;
             color: #ffd700;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+            cursor: pointer;
+            padding: 8px;
+            transition: 0.3s;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            transition: 0.3s;
         }
         .settings-icon:hover {
-            transform: scale(1.1) rotate(45deg);
-            background: #ffd700;
-            color: #3b0a10;
+            transform: scale(1.15) rotate(90deg);
+            color: #fff;
         }
         
         .main-layout { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 900px; text-align: center; }
@@ -62,14 +58,13 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            gap: 10px; 
-            margin-bottom: 12px; 
+            gap: 8px; 
+            margin-bottom: 8px; 
             width: 100%;
             text-align: center; 
         }
         
-        /* 1. Logo dibesarkan untuk telefon bimbit */
-        .logo { max-height: clamp(75px, 15vw, 110px); width: auto; object-fit: contain; filter: drop-shadow(0 0 12px rgba(255,215,0,0.7)); }
+        .logo { max-height: clamp(65px, 13vw, 100px); width: auto; object-fit: contain; filter: drop-shadow(0 0 12px rgba(255,215,0,0.7)); }
         
         .title-container {
             display: flex;
@@ -79,28 +74,26 @@
             width: 100%;
         }
 
-        /* 2. Tajuk H1 dibesarkan untuk telefon bimbit */
         h1 { 
             font-family: 'Rye', serif;
             color: #ffd700; 
-            font-size: clamp(1.8rem, 5.5vw, 2.6rem); 
+            font-size: clamp(1.6rem, 5vw, 2.4rem); 
             text-shadow: 0 0 12px rgba(0,0,0,0.9), 2px 2px 0px #8b0000; 
             font-weight: 400; 
             letter-spacing: 1px; 
             text-transform: uppercase; 
-            margin-bottom: 4px; 
+            margin-bottom: 2px; 
         }
-        p { font-size: clamp(0.95rem, 2.2vw, 1.1rem); color: #fff; margin-bottom: 8px; text-shadow: 0 1px 4px rgba(0,0,0,0.9); padding: 0 10px; font-weight: 600; }
+        p { font-size: clamp(1rem, 2.4vw, 1.25rem); color: #fff; margin-bottom: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.9); padding: 0 10px; font-weight: 600; }
 
         .wheel-container { 
             position: relative; 
             display: inline-block; 
-            margin: 20px 0 20px 0; 
+            margin: 10px 0 10px 0; 
             width: var(--wheel-size); 
             height: var(--wheel-size); 
         }
 
-        /* KESAN DENYUTAN (PULSE EFFECT) CAHAYA DI BELAKANG RODA */
         @keyframes pulseGlow {
             0% { transform: scale(0.95); opacity: 0.5; filter: blur(8px); }
             50% { transform: scale(1.12); opacity: 0.95; filter: blur(15px); }
@@ -123,15 +116,14 @@
             background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 69, 0, 0.6) 50%, rgba(255, 255, 255, 0) 80%);
         }
         
-        /* Penunjuk Segi Tiga Terbalik 3D Gold */
         .pointer { 
             position: absolute; 
-            top: 6px; 
+            top: 2px; 
             left: 50%; 
             transform: translateX(-50%); 
             z-index: 20; 
-            width: calc(var(--wheel-size) * 0.085);
-            height: calc(var(--wheel-size) * 0.11);
+            width: calc(var(--wheel-size) * 0.11);
+            height: calc(var(--wheel-size) * 0.14);
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7)); 
         }
 
@@ -143,7 +135,6 @@
             z-index: 2;
         }
 
-        /* 3. Butang Utama dibesarkan & dioptimumkan untuk sentuhan jari */
         .btn-main { 
             background: linear-gradient(135deg, #ffd700, #e67e22); 
             color: #230408; border: none; 
@@ -159,29 +150,28 @@
         .btn-main:disabled { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,2,5,0.92); justify-content: center; align-items: center; z-index: 100; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-content { background: #3b0a10; padding: clamp(20px, 3vw, 30px); border-radius: 20px; width: 100%; max-width: 460px; text-align: center; border: 2px solid #ffd700; box-shadow: 0 15px 40px rgba(0,0,0,0.8); animation: popIn 0.3s ease; position: relative; overflow: hidden; }
+        .modal-content { background: #3b0a10; padding: clamp(20px, 3vw, 30px); border-radius: 20px; width: 100%; max-width: 480px; text-align: center; border: 2px solid #ffd700; box-shadow: 0 15px 40px rgba(0,0,0,0.8); animation: popIn 0.3s ease; position: relative; overflow: hidden; }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         
-        .quiz-box { background: rgba(0,0,0,0.4); padding: 16px; border-radius: 12px; border-left: 4px solid #ffd700; text-align: left; margin-bottom: 16px; }
-        .answers-grid { display: flex; gap: 12px; }
-        .ans-btn { flex: 1; padding: 14px; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: 0.2s; }
-        .ans-btn:hover { transform: translateY(-3px); }
+        .quiz-box { background: rgba(0,0,0,0.4); padding: 16px; border-radius: 12px; border-left: 4px solid #ffd700; text-align: left; margin-bottom: 14px; }
+        .answers-container { display: flex; flex-direction: column; gap: 8px; max-height: 38vh; overflow-y: auto; padding-right: 4px; text-align: left; }
+        .ans-btn { width: 100%; padding: 12px 14px; font-size: 0.95rem; font-weight: bold; border: 2px solid rgba(255,215,0,0.3); border-radius: 10px; cursor: pointer; color: #fff; background: rgba(0,0,0,0.4); box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.2s; text-align: left; }
+        .ans-btn:hover { border-color: #ffd700; background: rgba(212, 175, 55, 0.2); transform: translateY(-2px); }
 
-        /* Pilihan Mode dalam Settings */
         .mode-options {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin: 15px 0;
+            margin: 10px 0;
             text-align: left;
-            max-height: 55vh;
+            max-height: 35vh;
             overflow-y: auto;
             padding-right: 4px;
         }
         .mode-card {
             background: rgba(0, 0, 0, 0.4);
             border: 2px solid rgba(255, 215, 0, 0.3);
-            padding: 12px 14px;
+            padding: 10px 12px;
             border-radius: 10px;
             cursor: pointer;
             transition: 0.2s;
@@ -198,11 +188,11 @@
             background: rgba(212, 175, 55, 0.22);
             box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
-        .mode-card h4 { color: #ffd700; font-size: 1.05rem; margin-bottom: 2px; }
-        .mode-card p { font-size: 0.85rem; color: #f5e1e3; margin: 0; }
+        .mode-card h4 { color: #ffd700; font-size: 0.95rem; margin-bottom: 2px; }
+        .mode-card p { font-size: 0.78rem; color: #f5e1e3; margin: 0; }
         .mode-radio {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 2px solid #ffd700;
             border-radius: 50%;
             display: flex;
@@ -213,8 +203,8 @@
         }
         .mode-card.active .mode-radio::after {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #ffd700;
             border-radius: 50%;
         }
@@ -231,17 +221,31 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
         }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #ffd700;
+            font-weight: Normal;
+            padding: 8px 0;
+            z-index: 80;
+            backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body>
 
-<!-- IKON TETAPAN DI KANAN BAWAH -->
-<div class="settings-icon" onclick="openSettingsModal()" title="Tetapan Mod Soalan">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+<button class="settings-icon" onclick="openSettingsModal()" title="Tetapan Mod & Stok Hadiah">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="5" r="2.2"></circle>
+        <circle cx="12" cy="12" r="2.2"></circle>
+        <circle cx="12" cy="19" r="2.2"></circle>
     </svg>
-</div>
+</button>
 
 <div class="main-layout">
     <div class="logo-area">
@@ -252,10 +256,8 @@
         </div>
     </div>
 
-    <!-- PAPARAN UTAMA -->
     <div id="section-wheel-main" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <div class="wheel-container" id="wheel-container-div">
-            <!-- Penunjuk Segi Tiga Terbalik 3D Gold -->
             <div class="pointer">
                 <svg width="100%" height="100%" viewBox="0 0 30 40">
                     <defs>
@@ -275,21 +277,25 @@
             </div>
             <canvas id="wheel" width="500" height="500"></canvas>
         </div>
-        <button id="spin-action-btn" class="btn-main" onclick="spinWheelAction()">PUTAR RODA SEKARANG</button>
+        <button id="spin-action-btn" class="btn-main" style="margin-top: 15px;" onclick="spinWheelAction()">PUTAR RODA SEKARANG</button>
     </div>
 </div>
 
-<!-- MODAL TETAPAN MOD SOALAN -->
+<footer>
+    © 2026 Roda Integriti | Bahagian Pendidikan Masyarakat (PENMAS)
+</footer>
+
+<!-- MODAL TETAPAN MOD & STOK -->
 <div id="modal-settings" class="modal">
     <div class="modal-content">
-        <h2 style="color:#ffd700; margin-bottom:8px; font-size: 1.4rem;">TETAPAN KATEGORI SOALAN</h2>
-        <p style="font-size: 0.9rem; color:#f5e1e3; margin-bottom:12px;">Pilih sasaran audiens anda:</p>
+        <h2 style="color:#ffd700; margin-bottom:6px; font-size: 1.3rem;">TETAPAN & JUMLAH STOK HADIAH</h2>
+        <p style="font-size: 0.85rem; color:#f5e1e3; margin-bottom:8px;">Pilih audiens & tetapkan jumlah stok</p>
         
         <div class="mode-options">
             <div class="mode-card" id="card-pelajar" onclick="selectMode('pelajar')">
                 <div>
-                    <h4>Pelajar (Sekolah / Universiti)</h4>
-                    <p>Soalan berkaitan disiplin, anti-buli, jujur peperiksaan & sahsiah.</p>
+                    <h4>Pelajar Sekolah Rendah</h4>
+                    <p>Soalan kuiz integriti & pencegahan rasuah.</p>
                 </div>
                 <div class="mode-radio"></div>
             </div>
@@ -297,37 +303,44 @@
             <div class="mode-card" id="card-penjawat_awam" onclick="selectMode('penjawat_awam')">
                 <div>
                     <h4>Penjawat Awam</h4>
-                    <p>Soalan berkaitan integriti perkhidmatan awam, perolehan & hadiah.</p>
+                    <p>Soalan integriti perkhidmatan awam & perolehan.</p>
                 </div>
                 <div class="mode-radio"></div>
             </div>
             
             <div class="mode-card" id="card-awam" onclick="selectMode('awam')">
                 <div>
-                    <h4>Orang Awam / Sektor Swasta</h4>
-                    <p>Soalan berkaitan liabiliti korporat, perniagaan & aduan SPRM.</p>
+                    <h4>Orang Awam / Swasta</h4>
+                    <p>Soalan liabiliti korporat & aduan SPRM.</p>
                 </div>
                 <div class="mode-radio"></div>
             </div>
         </div>
 
-        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem; margin-bottom: 10px;" onclick="saveSettings()">SIMPAN & GUNA</button>
-        <div style="font-size: 0.8rem; color: #ffd700; opacity: 0.85; text-align: center; letter-spacing: 0.5px;">github.com/fahmieabdrahim</div>
+        <h4 style="color:#ffd700; font-size: 0.95rem; margin: 10px 0 6px 0; text-align:left;">Kuantiti Stok Hadiah:</h4>
+        <div id="stock-inputs-container" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: left; max-height: 25vh; overflow-y: auto; padding-right: 4px;">
+            <!-- Dinamik dari JS -->
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#444; color:#fff;" onclick="closeSettingsModal()">TUTUP</button>
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem;" onclick="saveSettings()">SIMPAN</button>
+        </div>
+        <div style="font-size: 0.75rem; color: #ffd700; opacity: 0.85; text-align: center; letter-spacing: 0.5px; margin-top: 8px;">github.com/fahmieabdrahim</div>
     </div>
 </div>
 
-<!-- POPUP SOALAN YA / TIDAK -->
+<!-- POPUP SOALAN KUIZ BERBILANG PILIHAN -->
 <div id="modal-quiz" class="modal">
     <div class="modal-content">
-        <h2 style="color:#ffd700; margin-bottom:10px; font-size: 1.5rem;">UJIAN MINDA INTEGRITI</h2>
+        <h2 style="color:#ffd700; margin-bottom:8px; font-size: 1.4rem;">UJIAN MINDA INTEGRITI</h2>
         <div class="quiz-box">
-            <h3 id="segment-title" style="color:#ff4757; margin-bottom:6px; font-size:1.1rem;">Hadiah</h3>
-            <p id="question-text" style="font-size: 1.1rem; color:#fff; margin-bottom:0; line-height: 1.4;">Soalan...</p>
+            <h3 id="segment-title" style="color:#ff4757; margin-bottom:6px; font-size:1.05rem;">Hadiah</h3>
+            <p id="question-text" style="font-size: 1rem; color:#fff; margin-bottom:0; line-height: 1.4;">Soalan...</p>
         </div>
-        <p style="font-size:0.95rem; color:#f5e1e3; margin-bottom: 12px;">Pilih jawapan anda di bawah:</p>
-        <div class="answers-grid">
-            <button class="ans-btn" style="background:#2ed573;" onclick="checkAnswer('Ya')">YA</button>
-            <button class="ans-btn" style="background:#ff4757;" onclick="checkAnswer('Tidak')">TIDAK</button>
+        <p style="font-size:0.85rem; color:#f5e1e3; margin-bottom: 10px;">Pilih jawapan yang tepat di bawah:</p>
+        <div id="answers-container" class="answers-container">
+            <!-- Pilihan jawapan dinamik -->
         </div>
     </div>
 </div>
@@ -335,12 +348,15 @@
 <!-- SKRIN MENANG (BETUL) -->
 <div id="modal-prize" class="modal">
     <div class="modal-content" id="prize-modal-content">
-        <h2 style="color: #2ed573; margin-bottom:10px; font-size: 1.6rem;">🎉 TAHNIAH! ANDA MENANG!</h2>
-        <p style="font-size:1.05rem; color:#f5e1e3;">Jawapan anda tepat. Tunjukkan skrin ini kepada petugas di reruai SPRM.</p>
-        <div style="background: rgba(0,0,0,0.4); border: 2px dashed #ffd700; padding: 15px; border-radius: 10px; margin: 15px 0;">
+        <h2 style="color: #2ed573; margin-bottom:10px; font-size: 1.6rem;">🎉 TAHNIAH!</h2>
+        <p style="font-size:1.05rem; color:#f5e1e3; margin-bottom: 12px;">Anda berjaya mendapatkan hadiah</p>
+        <div style="background: rgba(0,0,0,0.4); border: 2px dashed #ffd700; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
             <h3 id="prize-won" style="color:#ffd700; font-size:1.4rem;">Hadiah</h3>
         </div>
-        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem;" onclick="resetGame()">SELESAI / SETERUSNYA</button>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#2ed573; color:#fff;" onclick="redeemPrize()">TEBUS HADIAH</button>
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#444;" onclick="resetGame()">SELESAI</button>
+        </div>
     </div>
 </div>
 
@@ -356,62 +372,153 @@
 <script>
     const questionsDatabase = {
         pelajar: [
-            { q: "Adakah perbuatan meniru dalam peperiksaan dikira langkah awal salah laku integriti?", a: "Ya" },
-            { q: "Adakah pelajar bertanggungjawab menolak budaya memberi hadiah rasuah kepada guru untuk markah?", a: "Ya" },
-            { q: "Adakah mengambil barang rakan sekelas tanpa kebenaran dikira amalan integriti yang baik?", a: "Tidak" },
-            { q: "Adakah ponteng sekolah dan memalsukan surat ibu bapa menunjukkan nilai integriti yang tinggi?", a: "Tidak" },
-            { q: "Adakah membuli rakan di sekolah melanggar prinsip integriti dan nilai murni?", a: "Ya" },
-            { q: "Adakah melaporkan salah laku vandalisme di sekolah kepada guru merupakan tindakan yang berintegriti?", a: "Ya" },
-            { q: "Adakah menipu nama semasa ditangkap pengawas sekolah satu kesalahan disiplin dan integriti?", a: "Ya" },
-            { q: "Adakah pelajar perlu jujur dalam menyiapkan kerja sekolah sendiri tanpa meniru tugasan orang lain?", a: "Ya" },
-            { q: "Adakah meminta wang perlindungan daripada pelajar lain di sekolah dikira sebagai salah laku rasuah?", a: "Ya" },
-            { q: "Adakah menjaga harta benda sekolah dengan baik mencerminkan sahsiah dan integriti pelajar?", a: "Ya" },
-            { q: "Adakah menyembunyikan kesalahan rakan yang merosakkan harta benda sekolah merupakan tindakan betul?", a: "Tidak" },
-            { q: "Adakah ketua kelas patut menerima suapan untuk mengelak daripada melaporkan pelajar yang bising?", a: "Tidak" },
-            { q: "Adakah aktiviti kelab pencegahan rasuah di sekolah penting untuk membina generasi berintegriti?", a: "Ya" },
-            { q: "Adakah memalsukan tandatangan ibu bapa pada buku laporan kemajuan sekolah dikira perbuatan jujur?", a: "Tidak" },
-            { q: "Adakah berbohong kepada guru tentang sebab ketidakhadiran ke sekolah satu amalan integriti?", a: "Tidak" }
+            {
+                q: "Apakah nama agensi yang bertanggungjawab membanteras rasuah di Malaysia?",
+                options: [
+                    "A. Suruhanjaya Pencegah Rasuah Malaysia",
+                    "B. Suruhanjaya Pilihan Raya Malaysia",
+                    "C. Suruhanjaya Pencegahan Rasuah Malaysia",
+                    "D. Suruhanjaya Pendidikan Rasuah Malaysia"
+                ],
+                a: "C. Suruhanjaya Pencegahan Rasuah Malaysia"
+            },
+            {
+                q: "Rasuah di sisi undang-undang negara dikategorikan sebagai satu…",
+                options: [
+                    "A. hobi biasa",
+                    "B. sukan lasak",
+                    "C. jenayah berat",
+                    "D. jenayah ringan"
+                ],
+                a: "C. jenayah berat"
+            },
+            {
+                q: "Apakah slogan rasmi yang digunakan oleh SPRM?",
+                options: [
+                    "A. Berani Rasuah Dihindar Maruah Terbilang",
+                    "B. Rasuah Dihina Maruah Dibina",
+                    "C. Berani dan Radikal Perangi Rasuah",
+                    "D. Maruah Dibina Rasuah Diperangi"
+                ],
+                a: "B. Rasuah Dihina Maruah Dibina"
+            },
+            {
+                q: "Apakah nombor talian bebas tol SPRM untuk melaporkan perbuatan rasuah?",
+                options: [
+                    "A. 1-800-88-6001",
+                    "B. 1-880-88-6000",
+                    "C. 1-800-88-6000",
+                    "D. 03-8889-0000"
+                ],
+                a: "C. 1-800-88-6000"
+            },
+            {
+                q: "Berikut adalah perbuatan rasuah KECUALI…",
+                options: [
+                    "A. Memberi sedekah ikhlas kepada mangsa banjir",
+                    "B. Memberi hadiah supaya dilantik menjadi AJK Kelab",
+                    "C. Tidak melaporkan perbuatan salah selepas terima duit habuan",
+                    "D. Melantik adik-beradik kerana rasuah jawatan"
+                ],
+                a: "A. Memberi sedekah ikhlas kepada mangsa banjir"
+            },
+            {
+                q: "Izz seorang pengawas menahan Ahmad yang datang lewat dan meminta dua ketul ayam goreng supaya namanya tidak ditulis. Perbuatan Izz adalah…",
+                options: [
+                    "A. Meminta rasuah",
+                    "B. Meminta hadiah",
+                    "C. Meminta bantuan",
+                    "D. Meminta sumbangan"
+                ],
+                a: "A. Meminta rasuah"
+            },
+            {
+                q: "Apakah tindakan yang patut Ahmad lakukan apabila diminta habuan makanan oleh pengawas?",
+                options: [
+                    "A. Makan bersama-sama dengan Izz",
+                    "B. Memberikan ayam goreng kepada Izz",
+                    "C. Mengikut sahaja permintaan Izz",
+                    "D. Tidak memberi dan melaporkan perbuatan Izz kepada guru disiplin"
+                ],
+                a: "D. Tidak memberi dan melaporkan perbuatan Izz kepada guru disiplin"
+            },
+            {
+                q: "Amin seorang murid yang rajin belajar, tidak meniru dalam peperiksaan, bercakap benar dan amanah. Amin merupakan murid yang…",
+                options: [
+                    "A. Ulat buku",
+                    "B. Berintegriti",
+                    "C. Suka menunjuk",
+                    "D. Ringan tulang"
+                ],
+                a: "B. Berintegriti"
+            },
+            {
+                q: "Sebagai ketua pasukan bola sepak yang amanah, Lim akan memilih ahli pasukan berdasarkan…",
+                options: [
+                    "A. Kawan baik sendiri",
+                    "B. Matthew yang menjaringkan gol terbanyak semasa latihan",
+                    "C. Kumar yang sanggup memberikan wang",
+                    "D. Hariz anak usahawan yang malas berlatih"
+                ],
+                a: "B. Matthew yang menjaringkan gol terbanyak semasa latihan"
+            },
+            {
+                q: "Berikut adalah bentuk-bentuk perbuatan rasuah KECUALI…",
+                options: [
+                    "A. Upah",
+                    "B. Hadiah",
+                    "C. Jawatan",
+                    "D. Makanan"
+                ],
+                a: "D. Makanan"
+            },
+            {
+                q: "Harta atau sumber yang diperolehi melalui jalan rasuah hukumnya adalah…",
+                options: [
+                    "A. Syubhah",
+                    "B. Halal",
+                    "C. Makruh",
+                    "D. Haram"
+                ],
+                a: "D. Haram"
+            },
+            {
+                q: "Apakah maksud sebenar bagi perkataan 'Integriti'?",
+                options: [
+                    "A. Melakukan perkara betul walaupun tidak dilihat oleh sesiapa",
+                    "B. Melakukan perbuatan jahat secara senyap",
+                    "C. Melakukan kebaikan hanya apabila dillihat guru",
+                    "D. Menyembunyikan kesalahan rakan"
+                ],
+                a: "A. Melakukan perkara betul walaupun tidak dilihat oleh sesiapa"
+            }
         ],
         penjawat_awam: [
             { q: "Adakah penjawat awam wajib membuat pengisytiharan harta kepada ketua jabatan mengikut peraturan semasa?", a: "Ya" },
             { q: "Adakah pegawai kerajaan dibenarkan menerima hadiah bernilai tinggi daripada pihak yang mempunyai urusan rasmi?", a: "Tidak" },
-            { q: "Adakah perbuatan meminta atau menerima balasan wang bagi meluluskan projek kerajaan dikira kesalahan rasuah?", a: "Ya" },
-            { q: "Adakah konflik kepentingan berlaku apabila pegawai meluluskan tender kepada syarikat ahli keluarga sendiri?", a: "Ya" },
-            { q: "Adakah penjawat awam perlu melaporkan sebarang tawaran suapan kepada SPRM dengan segera?", a: "Ya" },
-            { q: "Adakah lewat hadir bertugas tanpa alasan munasabah dikira mencabuli etika integriti perkhidmatan awam?", a: "Ya" },
-            { q: "Adakah membocorkan maklumat rasmi kerajaan kepada pihak luar demi kepentingan peribadi dibenarkan?", a: "Tidak" },
-            { q: "Adakah penggunaan kenderaan pejabat untuk urusan peribadi tanpa kebenaran dikira salah guna kuasa?", a: "Ya" },
-            { q: "Adakah amalan rasuah, penyelewengan dan salah guna kuasa boleh meruntuhkan imej pentadbiran negara?", a: "Ya" },
-            { q: "Adakah pegawai awam patut mengutamakan kepentingan awam berbanding kepentingan diri atau keluarga?", a: "Ya" },
-            { q: "Adakah menerima tajaan percutian mewah daripada kontraktor projek jabatan merupakan amalan yang betul?", a: "Tidak" },
-            { q: "Adakah cuti sakit palsu yang dikemukakan oleh kakitangan awam melanggar ikrar integriti perkhidmatan?", a: "Ya" },
-            { q: "Adakah ketelusan dalam urusan perolehan kerajaan penting untuk mengelakkan ketirisan wang rakyat?", a: "Ya" },
-            { q: "Adakah bersubahat menutup salah laku rakan sekerja satu tindakan yang berintegriti?", a: "Tidak" },
-            { q: "Adakah Ikrar Integriti Perkhidmatan Awam (IIPA) wajib dihayati dan diamalkan oleh setiap penjawat awam?", a: "Ya" }
+            { q: "Adakah perbuatan meminta atau menerima balasan wang bagi meluluskan projek kerajaan dikira kesalahan rasuah?", a: "Ya" }
         ],
         awam: [
             { q: "Adakah syarikat swasta boleh didakwa jika pekerja memberi suapan atas nama syarikat (Liabiliti Korporat)?", a: "Ya" },
             { q: "Adakah aduan rasuah boleh dibuat secara rahsia melalui portal rasmi atau saluran aduan SPRM?", a: "Ya" },
-            { q: "Adakah memberi duit kopi kepada penguat kuasa untuk meloloskan diri daripada saman dikira rasuah?", a: "Ya" },
-            { q: "Adakah kontraktor swasta boleh menggunakan kabel dalaman untuk memenangi tender kerajaan tanpa telus?", a: "Tidak" },
-            { q: "Adakah pekerja swasta wajib menolak hadiah lumayan daripada pembekal yang mempunyai konflik kepentingan?", a: "Ya" },
-            { q: "Adakah masyarakat awam mempunyai tanggungjawab moral untuk melaporkan aktiviti rasuah di sekeliling?", a: "Ya" },
-            { q: "Adakah menerima komisen tersembunyi daripada pihak ketiga tanpa pengetahuan majikan sah di sisi undang-undang?", a: "Tidak" },
-            { q: "Adakah penipuan tuntutan bayaran (claims) dalam sektor swasta merupakan satu bentuk jenayah rasuah?", a: "Ya" },
-            { q: "Adakah pemberi maklumat (whistleblower) dilindungi di bawah undang-undang perlindungan saksi di Malaysia?", a: "Ya" },
-            { q: "Adakah memalsukan dokumen kewangan syarikat untuk mendapatkan pinjaman bank dikira amalan berintegriti?", a: "Tidak" },
-            { q: "Adakah perbuatan memeras ugut wang perlindungan daripada peniaga kecil oleh pihak luar sah di sisi undang-undang?", a: "Tidak" },
-            { q: "Adakah mengamalkan sikap pilih kasih dalam urusan perniagaan dengan pelanggan dibenarkan?", a: "Tidak" },
-            { q: "Adakah ketelusan dalam pentadbiran syarikat swasta membantu mencegah salah laku kewangan?", a: "Ya" },
-            { q: "Adakah hadiah berbentuk keraian perniagaan yang terlalu mewah dan boleh mempengaruhi keputusan dikira salah?", a: "Ya" },
-            { q: "Adakah rakyat Malaysia perlu bersama-sama menolak budaya rasuah demi kesejahteraan ekonomi negara?", a: "Ya" }
+            { q: "Adakah memberi duit kopi kepada penguat kuasa untuk meloloskan diri daripada saman dikira rasuah?", a: "Ya" }
         ]
     };
 
     let activeMode = 'pelajar';
     let tempSelectedMode = 'pelajar';
     let selectedPrize = '';
-    let currentCorrectAnswer = 'Ya';
+    let selectedPrizeObj = null;
+    let currentCorrectAnswer = '';
+
+    let sectors = [
+        { line1: "SET ALAT", line2: "TULIS", stock: 0 },
+        { line1: "BUKU", line2: "NOTA", stock: 0 },
+        { line1: "PEN", line2: "", stock: 0 },
+        { line1: "KEY", line2: "CHAIN", stock: 0 },
+        { line1: "TUMBLER", line2: "", stock: 0 },
+        { line1: "HADIAH", line2: "UTAMA", stock: 0 }
+    ];
 
     let audioCtx = null;
     function initAudio() {
@@ -438,34 +545,26 @@
         } catch(e) {}
     }
 
+    // Kesan bunyi menang yang dinaik taraf (Fanfare / Kemenangan yang lebih meriah)
     function playWinSound() {
         initAudio();
         if (!audioCtx) return;
         try {
-            const notes = [523.25, 659.25, 783.99, 1046.50];
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
             notes.forEach((note, index) => {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(note, audioCtx.currentTime + index * 0.12);
-                gain.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.12);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.25);
+                osc.type = index === notes.length - 1 ? 'sine' : 'triangle';
+                osc.frequency.setValueAtTime(note, audioCtx.currentTime + index * 0.1);
+                gain.gain.setValueAtTime(0.35, audioCtx.currentTime + index * 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.1 + 0.35);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                osc.start(audioCtx.currentTime + index * 0.12);
-                osc.stop(audioCtx.currentTime + index * 0.12 + 0.25);
+                osc.start(audioCtx.currentTime + index * 0.1);
+                osc.stop(audioCtx.currentTime + index * 0.1 + 0.35);
             });
         } catch(e) {}
     }
-
-    const sectors = [
-        { line1: "HADIAH", line2: "UTAMA" },
-        { line1: "BOTOL AIR", line2: "SPRM" },
-        { line1: "NOTA &", line2: "PEN" },
-        { line1: "CENDERAHATI", line2: "EKSKLUSIF" },
-        { line1: "SAGUHATI", line2: "MISTERI" },
-        { line1: "BAJU LOKAP", line2: "SPRM" }
-    ];
     
     let startAngle = 0;
     let isSpinning = false;
@@ -490,9 +589,9 @@
         ctx.beginPath();
         ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
         const rimGrad = ctx.createRadialGradient(centerX - 60, centerY - 60, 20, centerX, centerY, outerRadius);
-        rimGrad.addColorStop(0, '#e74c3c');
-        rimGrad.addColorStop(0.5, '#b30000');
-        rimGrad.addColorStop(1, '#4a0000');
+        rimGrad.addColorStop(0, '#ff4d4d');
+        rimGrad.addColorStop(0.5, '#ff0000');
+        rimGrad.addColorStop(1, '#990000');
         ctx.fillStyle = rimGrad;
         ctx.fill();
         ctx.lineWidth = 7;
@@ -511,17 +610,15 @@
             ctx.arc(0, 0, wheelRadius, angle, angle + arc, false);
             ctx.lineTo(0, 0);
             
+            const sliceGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, wheelRadius);
             if (i % 2 === 0) {
-                const sliceGrad = ctx.createLinearGradient(0, 0, 200, 200);
-                sliceGrad.addColorStop(0, '#e74c3c');
-                sliceGrad.addColorStop(1, '#900c3f');
-                ctx.fillStyle = sliceGrad;
+                sliceGrad.addColorStop(0, '#e63946');
+                sliceGrad.addColorStop(1, '#4a050c');
             } else {
-                const sliceGrad = ctx.createLinearGradient(0, 0, 200, 200);
-                sliceGrad.addColorStop(0, '#f1c40f');
-                sliceGrad.addColorStop(1, '#d35400');
-                ctx.fillStyle = sliceGrad;
+                sliceGrad.addColorStop(0, '#fffae6');
+                sliceGrad.addColorStop(1, '#bfa86f');
             }
+            ctx.fillStyle = sliceGrad;
             ctx.fill();
             
             ctx.strokeStyle = goldGradient;
@@ -531,13 +628,13 @@
             ctx.save();
             let textGrad = ctx.createLinearGradient(0, -25, 0, 25);
             if (i % 2 === 0) {
-                textGrad.addColorStop(0, "#ffffff");
-                textGrad.addColorStop(1, "#fff0f5");
+                textGrad.addColorStop(0, "#f9f6ee");
+                textGrad.addColorStop(1, "#e6dbc2");
                 ctx.fillStyle = textGrad;
                 ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
             } else {
-                textGrad.addColorStop(0, "#230408");
-                textGrad.addColorStop(1, "#4a0000");
+                textGrad.addColorStop(0, "#5a0000");
+                textGrad.addColorStop(1, "#3b0a10");
                 ctx.fillStyle = textGrad;
                 ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
             }
@@ -548,41 +645,66 @@
             ctx.font = "900 16px 'Segoe UI', Tahoma, sans-serif";
             
             ctx.fillText(sectors[i].line1, -ctx.measureText(sectors[i].line1).width / 2, -6);
-            ctx.fillText(sectors[i].line2, -ctx.measureText(sectors[i].line2).width / 2, 16);
+            if(sectors[i].line2) {
+                ctx.fillText(sectors[i].line2, -ctx.measureText(sectors[i].line2).width / 2, 16);
+            }
             
             ctx.restore();
         }
 
         ctx.save();
         ctx.beginPath();
-        ctx.arc(0, 0, wheelRadius, Math.PI, 2 * Math.PI, false);
-        const glassGrad = ctx.createLinearGradient(0, -wheelRadius, 0, 0);
-        glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.25)');
-        glassGrad.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+        ctx.arc(0, 0, wheelRadius, 0, 2 * Math.PI);
+        const glassGrad = ctx.createLinearGradient(-wheelRadius, -wheelRadius, wheelRadius, wheelRadius);
+        glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+        glassGrad.addColorStop(0.48, 'rgba(255, 255, 255, 0.05)');
+        glassGrad.addColorStop(0.52, 'rgba(0, 0, 0, 0.05)');
+        glassGrad.addColorStop(1, 'rgba(0, 0, 0, 0.25)');
         ctx.fillStyle = glassGrad;
         ctx.fill();
         ctx.restore();
 
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(0, 0, wheelRadius, 0, 2 * Math.PI);
+        const innerShadow = ctx.createRadialGradient(0, 0, wheelRadius * 0.55, 0, 0, wheelRadius);
+        innerShadow.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        innerShadow.addColorStop(0.8, 'rgba(0, 0, 0, 0.2)');
+        innerShadow.addColorStop(1, 'rgba(0, 0, 0, 0.6)');
+        ctx.fillStyle = innerShadow;
+        ctx.fill();
+        ctx.restore();
+
         const numBulbs = 16;
-        const timeNow = Date.now() * 0.007; 
+        const timeNow = Date.now() * 0.005; 
         for (let i = 0; i < numBulbs; i++) {
             const angle = (i * 2 * Math.PI) / numBulbs;
             const bulbX = (outerRadius - 13) * Math.cos(angle);
             const bulbY = (outerRadius - 13) * Math.sin(angle);
             
-            const sparkle = Math.sin(timeNow + i * 0.6); 
-            const bulbRadius = 4.5 + sparkle * 1.8; 
-            const glowBlurSize = 6 + sparkle * 6; 
+            const sparkle = Math.sin(timeNow * 3 + i * 0.8); 
+            const bulbRadius = 8.5 + sparkle * 2.5; 
+            const glowBlurSize = 10 + sparkle * 6; 
             
+            const isWhite = (i + Math.floor(Date.now() / 250)) % 2 === 0;
+
             ctx.beginPath();
-            ctx.arc(bulbX, bulbY, Math.max(2, bulbRadius), 0, 2 * Math.PI);
-            const bulbGrad = ctx.createRadialGradient(bulbX - 1, bulbY - 1, 0.2, bulbX, bulbY, Math.max(2, bulbRadius));
-            bulbGrad.addColorStop(0, '#ffffff');
-            bulbGrad.addColorStop(0.4, '#fff6a9');
-            bulbGrad.addColorStop(1, '#ff9900');
-            ctx.fillStyle = bulbGrad;
-            ctx.shadowColor = "#ffd700";
-            ctx.shadowBlur = Math.max(2, glowBlurSize);
+            ctx.arc(bulbX, bulbY, Math.max(3.5, bulbRadius), 0, 2 * Math.PI);
+            const bulbGrad = ctx.createRadialGradient(bulbX - 1, bulbY - 1, 0.2, bulbX, bulbY, Math.max(3.5, bulbRadius));
+            
+            if (isWhite) {
+                bulbGrad.addColorStop(0, '#ffffff');
+                bulbGrad.addColorStop(0.5, '#e0f7fa');
+                bulbGrad.addColorStop(1, '#80deea');
+                ctx.shadowColor = "#ffffff";
+            } else {
+                bulbGrad.addColorStop(0, '#ffffa3');
+                bulbGrad.addColorStop(0.5, '#ffd700');
+                bulbGrad.addColorStop(1, '#ff8c00');
+                ctx.shadowColor = "#ffd700";
+            }
+
+            ctx.shadowBlur = Math.max(4, glowBlurSize);
             ctx.fill();
             ctx.shadowBlur = 0;
         }
@@ -613,10 +735,37 @@
         requestAnimationFrame(renderLoop);
     }
 
+    function renderStockInputs() {
+        const container = document.getElementById('stock-inputs-container');
+        container.innerHTML = '';
+        sectors.forEach((sec, idx) => {
+            const name = `${sec.line1} ${sec.line2}`.trim();
+            const div = document.createElement('div');
+            div.style.display = 'flex';
+            div.style.justifyContent = 'space-between';
+            div.style.alignItems = 'center';
+            div.style.background = 'rgba(0,0,0,0.3)';
+            div.style.padding = '6px 10px';
+            div.style.borderRadius = '8px';
+            div.style.border = '1px solid rgba(255,215,0,0.2)';
+            
+            div.innerHTML = `
+                <span style="font-size:0.85rem; font-weight:600; color:#ffd700;">${name}</span>
+                <input type="number" id="stock-input-${idx}" value="${sec.stock}" min="0" style="width: 65px; padding: 3px 6px; background: rgba(255,255,255,0.1); border: 1px solid #ffd700; color: #fff; border-radius: 4px; text-align: center; font-weight: bold;">
+            `;
+            container.appendChild(div);
+        });
+    }
+
     function openSettingsModal() {
         tempSelectedMode = activeMode;
         updateSettingsCardUI();
+        renderStockInputs();
         document.getElementById('modal-settings').style.display = 'flex';
+    }
+
+    function closeSettingsModal() {
+        document.getElementById('modal-settings').style.display = 'none';
     }
 
     function selectMode(mode) {
@@ -637,18 +786,50 @@
 
     function saveSettings() {
         activeMode = tempSelectedMode;
+        sectors.forEach((sec, idx) => {
+            const input = document.getElementById(`stock-input-${idx}`);
+            if (input) {
+                sec.stock = Math.max(0, parseInt(input.value) || 0);
+            }
+        });
         document.getElementById('modal-settings').style.display = 'none';
     }
 
     function spinWheelAction() {
         if(isSpinning) return;
+        
+        let totalStock = sectors.reduce((sum, s) => sum + s.stock, 0);
+        if (totalStock <= 0) {
+            alert("Semua hadiah telah habis! Sila tambah stok di menu tetapan.");
+            return;
+        }
+
         isSpinning = true;
         document.getElementById('spin-action-btn').disabled = true;
-        
         document.getElementById('wheel-container-div').classList.add('spinning');
 
-        const targetIndex = Math.floor(Math.random() * sectors.length);
-        selectedPrize = `${sectors[targetIndex].line1} ${sectors[targetIndex].line2}`;
+        let rand = Math.random() * totalStock;
+        let currentSum = 0;
+        let targetIndex = 0;
+        for (let i = 0; i < sectors.length; i++) {
+            currentSum += sectors[i].stock;
+            if (rand <= currentSum) {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (sectors[targetIndex].stock <= 0) {
+            for (let i = 0; i < sectors.length; i++) {
+                if (sectors[i].stock > 0) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+        }
+
+        selectedPrizeObj = sectors[targetIndex];
+        selectedPrize = `${sectors[targetIndex].line1} ${sectors[targetIndex].line2}`.trim();
 
         const extraSpins = 6 * 2 * Math.PI;
         const targetCenterAngle = targetIndex * arc + arc / 2;
@@ -669,77 +850,100 @@
             
             startAngle = initialAngle + (totalRotationNeeded * easeOut);
             
-            let currentSegment = Math.floor((startAngle % (2 * Math.PI)) / arc);
+            const currentNormalizedAngle = (2 * Math.PI - (startAngle % (2 * Math.PI))) % (2 * Math.PI);
+            const currentSegment = Math.floor(currentNormalizedAngle / arc);
             if (currentSegment !== lastSegmentCheck) {
                 playTickSound();
                 lastSegmentCheck = currentSegment;
             }
 
-            if(progress < 1) {
+            if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
                 isSpinning = false;
-                startAngle = finalAngle;
-
                 document.getElementById('wheel-container-div').classList.remove('spinning');
-
-                const mainBtn = document.getElementById('spin-action-btn');
-                mainBtn.disabled = false;
-                mainBtn.innerText = "JAWAB SOALAN";
-                mainBtn.setAttribute('onclick', 'openQuizModal()');
+                document.getElementById('spin-action-btn').disabled = false;
+                playWinSound();
+                showQuizModal();
             }
         }
         requestAnimationFrame(animate);
     }
 
-    function openQuizModal() {
-        const questionsList = questionsDatabase[activeMode];
-        const currentQ = questionsList[Math.floor(Math.random() * questionsList.length)];
-        currentCorrectAnswer = currentQ.a;
-
-        document.getElementById('segment-title').innerText = `Hadiah Bertuah: ${selectedPrize}`;
-        document.getElementById('question-text').innerText = currentQ.q;
+    function showQuizModal() {
+        const db = questionsDatabase[activeMode];
+        const randomQ = db[Math.floor(Math.random() * db.length)];
+        currentCorrectAnswer = randomQ.a;
         
+        document.getElementById('segment-title').innerText = selectedPrize;
+        document.getElementById('question-text').innerText = randomQ.q;
+        
+        const answersContainer = document.getElementById('answers-container');
+        answersContainer.innerHTML = '';
+
+        if (randomQ.options) {
+            randomQ.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'ans-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                answersContainer.appendChild(btn);
+            });
+        } else {
+            ['Ya', 'Tidak'].forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'ans-btn';
+                btn.style.textAlign = 'center';
+                btn.style.background = ans === 'Ya' ? '#2ed573' : '#ff4757';
+                btn.style.fontSize = '1.1rem';
+                btn.innerText = ans.toUpperCase();
+                btn.onclick = () => checkAnswer(ans);
+                answersContainer.appendChild(btn);
+            });
+        }
+
         document.getElementById('modal-quiz').style.display = 'flex';
     }
 
-    function triggerSurpriseConfetti() {
-        const container = document.getElementById('prize-modal-content');
-        for (let i = 0; i < 35; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = `${Math.random() * 100}%`;
-            confetti.style.top = `${Math.random() * 30}%`;
-            confetti.style.backgroundColor = ['#ffd700', '#ff4757', '#2ed573', '#ffffff'][Math.floor(Math.random() * 4)];
-            confetti.style.animationDuration = `${Math.random() * 0.8 + 0.6}s`;
-            container.appendChild(confetti);
-
-            setTimeout(() => { confetti.remove(); }, 1400);
-        }
-    }
-
-    function checkAnswer(ans) {
+    function checkAnswer(answer) {
         document.getElementById('modal-quiz').style.display = 'none';
-
-        if(ans === currentCorrectAnswer) {
-            document.getElementById('prize-won').innerText = `${selectedPrize}`;
+        if (answer === currentCorrectAnswer) {
+            document.getElementById('prize-won').innerText = selectedPrize;
             document.getElementById('modal-prize').style.display = 'flex';
             playWinSound();
-            triggerSurpriseConfetti();
+            createConfettiExplosion();
         } else {
             document.getElementById('modal-fail').style.display = 'flex';
         }
     }
 
-    function resetGame() {
-        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-        
-        const mainBtn = document.getElementById('spin-action-btn');
-        mainBtn.innerText = "PUTAR RODA SEKARANG";
-        mainBtn.setAttribute('onclick', 'spinWheelAction()');
+    function redeemPrize() {
+        if (selectedPrizeObj && selectedPrizeObj.stock > 0) {
+            selectedPrizeObj.stock -= 1; 
+        }
+        document.getElementById('modal-prize').style.display = 'none';
     }
 
-    renderLoop();
+    function resetGame() {
+        document.getElementById('modal-prize').style.display = 'none';
+        document.getElementById('modal-fail').style.display = 'none';
+    }
+
+    function createConfettiExplosion() {
+        const container = document.getElementById('prize-modal-content');
+        for (let i = 0; i < 40; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '50%';
+            confetti.style.backgroundColor = ['#ffd700', '#2ed573', '#ff4757', '#ffffff'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            container.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 1500);
+        }
+    }
+
+    requestAnimationFrame(renderLoop);
 </script>
 </body>
 </html>
