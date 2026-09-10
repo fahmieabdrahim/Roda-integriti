@@ -30,11 +30,22 @@
             font-family: 'Segoe UI', Tahoma, sans-serif;
         }
 
-        body { 
-            background: url('https://i.postimg.cc/knGkWDLf/Background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        body {
+            background-color: #0b0b0b;
+            background-image:
+                repeating-conic-gradient(
+                    from 0deg at 50% 50%,
+                    rgba(212, 175, 55, 0.08) 0deg 4deg,
+                    rgba(0, 0, 0, 0.25) 4deg 8deg
+                ),
+                radial-gradient(
+                    circle at 50% 50%,
+                    #1b1b1b 0%,
+                    #111111 18%,
+                    #0b0b0b 40%,
+                    #050505 70%,
+                    #000000 100%
+                );
             background-attachment: fixed;
             color: #fff;
             min-height: 100vh;
@@ -42,8 +53,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 15px 15px 70px 15px;
-            overflow-x: hidden; 
+            padding: 15px 15px 70px;
+            overflow-x: hidden;
         }
 
         .settings-icon {
@@ -57,7 +68,7 @@
             cursor: pointer;
             padding: 8px;
             transition: 0.3s;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +103,7 @@
             max-height: clamp(65px, 13vw, 100px);
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(255,215,0,0.7));
+            filter: drop-shadow(0 0 12px rgba(255,215,0,0.4));
         }
         
         .title-container {
@@ -107,7 +118,7 @@
             font-family: 'Rye', serif;
             color: #ffd700; 
             font-size: clamp(1.6rem, 5vw, 2.4rem); 
-            text-shadow: 0 0 12px rgba(0,0,0,0.9), 2px 2px 0px #8b0000; 
+            text-shadow: 0 0 12px rgba(0,0,0,0.9), 2px 2px 0px #332700; 
             font-weight: 400; 
             letter-spacing: 1px; 
             text-transform: uppercase; 
@@ -116,7 +127,7 @@
 
         p {
             font-size: clamp(1rem, 2.4vw, 1.25rem);
-            color: #fff;
+            color: #e0e0e0;
             margin-bottom: 6px;
             text-shadow: 0 1px 4px rgba(0,0,0,0.9);
             padding: 0 10px;
@@ -134,19 +145,17 @@
         @keyframes pulseGlow {
             0% {
                 transform: scale(0.95);
-                opacity: 0.5;
+                opacity: 0.4;
                 filter: blur(8px);
             }
-
             50% {
                 transform: scale(1.12);
-                opacity: 0.95;
+                opacity: 0.85;
                 filter: blur(15px);
             }
-
             100% {
                 transform: scale(0.95);
-                opacity: 0.5;
+                opacity: 0.4;
                 filter: blur(8px);
             }
         }
@@ -161,9 +170,9 @@
             border-radius: 50%;
             background: radial-gradient(
                 circle,
-                rgba(255, 215, 0, 0.7) 0%,
-                rgba(255, 140, 0, 0.4) 50%,
-                rgba(255, 255, 255, 0) 75%
+                rgba(255, 215, 0, 0.45) 0%,
+                rgba(212, 175, 55, 0.2) 50%,
+                rgba(0, 0, 0, 0) 75%
             );
             z-index: -1;
             pointer-events: none;
@@ -174,9 +183,9 @@
             animation: pulseGlow 0.45s ease-in-out infinite;
             background: radial-gradient(
                 circle,
-                rgba(255, 215, 0, 0.9) 0%,
-                rgba(255, 69, 0, 0.6) 50%,
-                rgba(255, 255, 255, 0) 80%
+                rgba(255, 215, 0, 0.75) 0%,
+                rgba(255, 140, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0) 80%
             );
         }
         
@@ -188,7 +197,7 @@
             z-index: 20; 
             width: calc(var(--wheel-size) * 0.11);
             height: calc(var(--wheel-size) * 0.14);
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7)); 
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.9)); 
         }
 
         canvas { 
@@ -200,8 +209,8 @@
         }
 
         .btn-main { 
-            background: linear-gradient(135deg, #ffd700, #e67e22); 
-            color: #230408;
+            background: linear-gradient(135deg, #ffd700, #b8860b); 
+            color: #111111;
             border: none; 
             padding: clamp(14px, 2.5vw, 18px) clamp(25px, 4vw, 45px); 
             font-size: clamp(1.1rem, 2.2vw, 1.35rem); 
@@ -209,7 +218,7 @@
             border-radius: 50px;
             cursor: pointer;
             transition: 0.3s; 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6); 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.8); 
             width: 100%;
             max-width: 420px; 
             text-transform: uppercase;
@@ -218,12 +227,13 @@
 
         .btn-main:hover {
             transform: scale(1.03);
-            background: linear-gradient(135deg, #ffed4a, #d35400);
+            background: linear-gradient(135deg, #ffed4a, #d4af37);
+            box-shadow: 0 6px 25px rgba(255,215,0,0.3);
         }
 
         .btn-main:disabled {
-            background: #444;
-            color: #888;
+            background: #222;
+            color: #666;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -236,42 +246,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(26,2,5,0.92);
+            background: rgba(10,10,10,0.92);
             justify-content: center;
             align-items: center;
             z-index: 100;
             padding: 20px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
         }
 
         .modal-content {
-            background: #3b0a10;
+            background: #141414;
             padding: clamp(20px, 3vw, 30px);
             border-radius: 20px;
             width: 100%;
             max-width: 480px;
             text-align: center;
             border: 2px solid #ffd700;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
             animation: popIn 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         @keyframes popIn {
-            0% {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .quiz-box {
-            background: rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.04);
             padding: 16px;
             border-radius: 12px;
             border-left: 4px solid #ffd700;
@@ -294,19 +297,19 @@
             padding: 12px 14px;
             font-size: 0.95rem;
             font-weight: bold;
-            border: 2px solid rgba(255,215,0,0.3);
+            border: 2px solid rgba(255,215,0,0.25);
             border-radius: 10px;
             cursor: pointer;
             color: #fff;
-            background: rgba(0,0,0,0.4);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: rgba(20,20,20,0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
             transition: 0.2s;
             text-align: left;
         }
 
         .ans-btn:hover {
             border-color: #ffd700;
-            background: rgba(212, 175, 55, 0.2);
+            background: rgba(212, 175, 55, 0.15);
             transform: translateY(-2px);
         }
 
@@ -322,8 +325,8 @@
         }
 
         .mode-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid rgba(255, 215, 0, 0.25);
             padding: 10px 12px;
             border-radius: 10px;
             cursor: pointer;
@@ -340,8 +343,8 @@
 
         .mode-card.active {
             border-color: #ffd700;
-            background: rgba(212, 175, 55, 0.22);
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
         .mode-card h4 {
@@ -352,7 +355,7 @@
 
         .mode-card p {
             font-size: 0.78rem;
-            color: #f5e1e3;
+            color: #ccc;
             margin: 0;
         }
 
@@ -386,20 +389,9 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(180px) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
         }
-
-        /* =========================
-           FOOTER RESPONSIVE
-           ========================= */
 
         footer {
             position: fixed;
@@ -410,11 +402,9 @@
             text-align: center;
             font-size: 0.8rem;
             color: #ffd700;
-            text-shadow: 0 0 0 rgba(0,0,0,0);
             font-weight: normal;
             background: transparent;
             padding: 8px 15px;
-            border-top: transparent;
             z-index: 80;
             backdrop-filter: blur(4px);
             line-height: 1.4;
@@ -424,14 +414,12 @@
             display: inline;
         }
 
-        /* PHONE */
         @media (max-width: 600px) {
             footer {
                 font-size: 0.72rem;
                 padding: 6px 12px;
                 line-height: 1.5;
             }
-
             footer span {
                 display: block;
             }
@@ -441,923 +429,146 @@
 
 <body>
 
-<button class="settings-icon"
-        onclick="openSettingsModal()"
-        title="Tetapan Mod & Stok Hadiah">
-
-    <svg width="24"
-         height="24"
-         viewBox="0 0 24 24"
-         fill="currentColor">
-
+<button class="settings-icon" onclick="openSettingsModal()" title="Tetapan Mod & Stok Hadiah">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
         <circle cx="12" cy="5" r="2.2"></circle>
         <circle cx="12" cy="12" r="2.2"></circle>
         <circle cx="12" cy="19" r="2.2"></circle>
-
     </svg>
 </button>
 
-
 <div class="main-layout">
-
     <div class="logo-area">
-
-        <img src="https://www.sprm.gov.my/admin/files/sprm/assets/images/sprm/artikel-korporat/logo/Logo-SPRM.png"
-             alt="Logo SPRM"
-             class="logo">
-
+        <img src="https://www.sprm.gov.my/admin/files/sprm/assets/images/sprm/artikel-korporat/logo/Logo-SPRM.png" alt="Logo SPRM" class="logo">
         <div class="title-container">
-
             <h1>PUTAR & BANTERAS RASUAH</h1>
-
-            <p>
-                Putar untuk tentukan hadiah dan jawab soalan integriti!
-            </p>
-
+            <p>Putar untuk tentukan hadiah dan jawab soalan integriti!</p>
         </div>
-
     </div>
 
-
-    <div id="section-wheel-main"
-         style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-
-        <div class="wheel-container"
-             id="wheel-container-div">
-
+    <div id="section-wheel-main" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="wheel-container" id="wheel-container-div">
             <div class="pointer">
-
-                <svg width="100%"
-                     height="100%"
-                     viewBox="0 0 30 40">
-
+                <svg width="100%" height="100%" viewBox="0 0 30 40">
                     <defs>
-
-                        <linearGradient id="goldTriangleGrad"
-                                        x1="0%"
-                                        y1="0%"
-                                        x2="100%"
-                                        y2="100%">
-
+                        <linearGradient id="goldTriangleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#fff6b0" />
                             <stop offset="30%" stop-color="#ffe259" />
                             <stop offset="60%" stop-color="#d4af37" />
                             <stop offset="100%" stop-color="#6e5004" />
-
                         </linearGradient>
-
-                        <filter id="shadow"
-                                x="-20%"
-                                y="-20%"
-                                width="140%"
-                                height="140%">
-
-                            <feDropShadow
-                                dx="0"
-                                dy="2"
-                                stdDeviation="2"
-                                flood-color="#000"
-                                flood-opacity="0.75"/>
-
+                        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
                         </filter>
-
                     </defs>
-
-                    <polygon points="2,2 28,2 15,38"
-                             fill="url(#goldTriangleGrad)"
-                             stroke="#ffffff"
-                             stroke-width="1.5"
-                             filter="url(#shadow)"/>
-
-                    <polygon points="4,4 15,4 15,34"
-                             fill="rgba(255,255,255,0.4)"/>
-
+                    <polygon points="2,2 28,2 15,38" fill="url(#goldTriangleGrad)" stroke="#ffd700" stroke-width="2" filter="url(#shadow)"/>
+                    <polygon points="4,4 15,4 15,34" fill="rgba(255,255,255,0.4)"/>
                 </svg>
-
             </div>
-
-            <canvas id="wheel"
-                    width="500"
-                    height="500"></canvas>
-
+            <canvas id="wheel" width="500" height="500"></canvas>
         </div>
 
-
-        <button id="spin-action-btn"
-                class="btn-main"
-                style="margin-top: 15px;"
-                onclick="spinWheelAction()">
-
+        <button id="spin-action-btn" class="btn-main" style="margin-top: 15px;" onclick="spinWheelAction()">
             PUTAR RODA SEKARANG
-
         </button>
-
     </div>
-
 </div>
 
-
-<!-- FOOTER -->
 <footer>
     <span>© 2026 Roda Integriti |</span>
     <span>Bahagian Pendidikan Masyarakat (PENMAS)</span>
 </footer>
 
-
 <!-- MODAL TETAPAN MOD & STOK -->
 <div id="modal-settings" class="modal">
-
     <div class="modal-content">
-
-        <h2 style="color:#ffd700; margin-bottom:6px; font-size: 1.3rem;">
-            Tetapan Roda Integriti
-        </h2>
-
-        <p style="font-size: 0.85rem; color:#f5e1e3; margin-bottom:6px; text-align: left;">
-            1. Pilih Kumpulan Sasaran:
-        </p>
-
+        <h2 style="color:#ffd700; margin-bottom:6px; font-size: 1.3rem;">Tetapan Roda Integriti</h2>
+        <p style="font-size: 0.85rem; color:#ccc; margin-bottom:6px; text-align: left;">1. Pilih Kumpulan Sasaran:</p>
 
         <div class="mode-options">
-
-            <div class="mode-card"
-                 id="card-pelajar"
-                 onclick="selectMode('pelajar')">
-
-                <div>
-
-                    <h4>Pelajar Sekolah Rendah</h4>
-
-                </div>
-
+            <div class="mode-card" id="card-pelajar" onclick="selectMode('pelajar')">
+                <div><h4>Pelajar Sekolah Rendah</h4></div>
                 <div class="mode-radio"></div>
-
             </div>
-
-
-            <div class="mode-card"
-                 id="card-penjawat_awam"
-                 onclick="selectMode('penjawat_awam')">
-
-                <div>
-
-                    <h4>Penjawat Awam</h4>
-
-                </div>
-
+            <div class="mode-card" id="card-penjawat_awam" onclick="selectMode('penjawat_awam')">
+                <div><h4>Penjawat Awam</h4></div>
                 <div class="mode-radio"></div>
-
             </div>
-
-
-            <div class="mode-card"
-                 id="card-awam"
-                 onclick="selectMode('awam')">
-
-                <div>
-
-                    <h4>Orang Awam / Sektor Swasta</h4>
-
-                </div>
-
+            <div class="mode-card" id="card-awam" onclick="selectMode('awam')">
+                <div><h4>Orang Awam / Sektor Swasta</h4></div>
                 <div class="mode-radio"></div>
-
             </div>
-
         </div>
 
-
-        <p style="font-size: 0.85rem; color:#f5e1e3; margin: 8px 0 4px 0; text-align:left;">
-            2. Tetapan Stok Hadiah: Setiap tetapan kuantiti akan dikemas kini secara langsung pada roda.
-        </p>
-
-
-        <div id="stock-inputs-container"
-             style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: left; max-height: 22vh; overflow-y: auto; padding-right: 4px;">
-
-            <!-- Dinamik dari JS -->
-
-        </div>
-
+        <p style="font-size: 0.85rem; color:#ccc; margin: 8px 0 4px 0; text-align:left;">2. Tetapan Stok Hadiah:</p>
+        <div id="stock-inputs-container" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: left; max-height: 22vh; overflow-y: auto; padding-right: 4px;"></div>
 
         <div style="display: flex; gap: 8px;">
-
-            <button class="btn-main"
-                    style="flex: 1; padding:12px; font-size:1rem; background:#444; color:#fff;"
-                    onclick="closeSettingsModal()">
-
-                Batal
-
-            </button>
-
-
-            <button class="btn-main"
-                    style="flex: 1; padding:12px; font-size:1rem;"
-                    onclick="saveSettings()">
-
-                Simpan
-
-            </button>
-
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#333; color:#fff;" onclick="closeSettingsModal()">Batal</button>
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem;" onclick="saveSettings()">Simpan</button>
         </div>
 
-
-        <div style="font-size: 0.75rem; color: #ffd700; opacity: 0.85; text-align: center; letter-spacing: 0.5px; margin-top: 8px;">
+        <div style="font-size: 0.75rem; color: #ffd700; opacity: 0.85; text-align: center; margin-top: 8px;">
             Dibangunkan oleh <a href="https://github.com/fahmieabdrahim" target="_blank" style="color: #ffd700; text-decoration: underline;">github.com/fahmieabdrahim</a>
         </div>
-
     </div>
-
 </div>
 
-
-<!-- POPUP SOALAN KUIZ BERBILANG PILIHAN -->
+<!-- POPUP SOALAN KUIZ -->
 <div id="modal-quiz" class="modal">
-
     <div class="modal-content">
-
-        <h2 style="color:#ffd700; margin-bottom:8px; font-size: 1.4rem;">
-            UJIAN MINDA INTEGRITI
-        </h2>
-
-
+        <h2 style="color:#ffd700; margin-bottom:8px; font-size: 1.4rem;">UJIAN MINDA INTEGRITI</h2>
         <div class="quiz-box">
-
-            <h3 id="segment-title"
-                style="color:#ff4757; margin-bottom:6px; font-size:1.05rem;">
-
-                Hadiah
-
-            </h3>
-
-
-            <p id="question-text"
-               style="font-size: 1rem; color:#fff; margin-bottom:0; line-height: 1.4;">
-
-                Soalan...
-
-            </p>
-
+            <h3 id="segment-title" style="color:#ffd700; margin-bottom:6px; font-size:1.05rem;">Hadiah</h3>
+            <p id="question-text" style="font-size: 1rem; color:#fff; margin-bottom:0; line-height: 1.4;">Soalan...</p>
         </div>
-
-
-        <p style="font-size:0.85rem; color:#f5e1e3; margin-bottom: 10px;">
-            Pilih jawapan yang tepat di bawah:
-        </p>
-
-
-        <div id="answers-container"
-             class="answers-container">
-
-            <!-- Pilihan jawapan dinamik -->
-
-        </div>
-
+        <p style="font-size:0.85rem; color:#ccc; margin-bottom: 10px;">Pilih jawapan yang tepat di bawah:</p>
+        <div id="answers-container" class="answers-container"></div>
     </div>
-
 </div>
-
 
 <!-- SKRIN MENANG -->
 <div id="modal-prize" class="modal">
-
-    <div class="modal-content"
-         id="prize-modal-content">
-
-        <h2 style="color: #2ed573; margin-bottom:10px; font-size: 1.6rem;">
-            🎉 TAHNIAH!
-        </h2>
-
-
-        <p style="font-size:1.05rem; color:#f5e1e3; margin-bottom: 12px;">
-            Anda berjaya mendapatkan hadiah
-        </p>
-
-
-        <div style="background: rgba(0,0,0,0.4); border: 2px dashed #ffd700; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-
-            <h3 id="prize-won"
-                style="color:#ffd700; font-size:1.4rem;">
-
-                Hadiah
-
-            </h3>
-
+    <div class="modal-content" id="prize-modal-content">
+        <h2 style="color: #ffd700; margin-bottom:10px; font-size: 1.6rem;">🎉 TAHNIAH!</h2>
+        <p style="font-size:1.05rem; color:#ccc; margin-bottom: 12px;">Anda berjaya mendapatkan hadiah</p>
+        <div style="background: rgba(255,255,255,0.04); border: 2px dashed #ffd700; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <h3 id="prize-won" style="color:#ffd700; font-size:1.4rem;">Hadiah</h3>
         </div>
-
-
         <div style="display: flex; gap: 10px;">
-
-            <button class="btn-main"
-                    style="flex: 1; padding:12px; font-size:1rem; background:#2ed573; color:#fff;"
-                    onclick="redeemPrize()">
-
-                TEBUS HADIAH
-
-            </button>
-
-
-            <button class="btn-main"
-                    style="flex: 1; padding:12px; font-size:1rem; background:#444;"
-                    onclick="resetGame()">
-
-                SELESAI
-
-            </button>
-
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#ffd700; color:#111;" onclick="redeemPrize()">TEBUS HADIAH</button>
+            <button class="btn-main" style="flex: 1; padding:12px; font-size:1rem; background:#333; color:#fff;" onclick="resetGame()">SELESAI</button>
         </div>
-
     </div>
-
 </div>
-
 
 <!-- SKRIN CUBA LAGI -->
-<div id="modal-fail"
-     class="modal">
-
+<div id="modal-fail" class="modal">
     <div class="modal-content">
-
-        <h2 style="color: #ff4757; margin-bottom:10px; font-size: 1.6rem;">
-            ❌ CUBA LAGI!
-        </h2>
-
-
-        <p style="font-size:1.05rem; color:#f5e1e3; margin-bottom:20px; line-height: 1.4;">
-            Maaf, jawapan anda kurang tepat. Terima kasih kerana menyokong kempen integriti SPRM!
-        </p>
-
-
-        <button class="btn-main"
-                style="width:100%; padding:14px; font-size:1.1rem; background:#444;"
-                onclick="resetGame()">
-
-            SELESAI / SETERUSNYA
-
-        </button>
-
+        <h2 style="color: #ffcc00; margin-bottom:10px; font-size: 1.6rem;">❌ CUBA LAGI!</h2>
+        <p style="font-size:1.05rem; color:#ccc; margin-bottom:20px; line-height: 1.4;">Maaf, jawapan anda kurang tepat. Terima kasih kerana menyokong kempen integriti SPRM!</p>
+        <button class="btn-main" style="width:100%; padding:14px; font-size:1.1rem; background:#333; color:#fff;" onclick="resetGame()">SELESAI / SETERUSNYA</button>
     </div>
-
 </div>
 
-
 <script>
-
     const questionsDatabase = {
-
         pelajar: [
-
-            {
-                q: "Apakah maksud integriti secara umum?",
-                options: [
-                    "A. Perangai yang suka marah",
-                    "B. Sifat jujur dan berpegang kepada prinsip moral yang tinggi",
-                    "C. Kepandaian dalam akademik",
-                    "D. Kecekapan fizikal"
-                ],
-                a: "B. Sifat jujur dan berpegang kepada prinsip moral yang tinggi"
-            },
-
-            {
-                q: "Mengapakah rasuah dianggap sebagai musuh nombor satu negara?",
-                options: [
-                    "A. Kerana ia merosakkan pentadbiran dan kemajuan negara",
-                    "B. Kerana ia menyusahkan guru di sekolah",
-                    "C. Kerana ia hanya melibatkan golongan kaya",
-                    "D. Kerana ia tidak ada dalam undang-undang"
-                ],
-                a: "A. Kerana ia merosakkan pentadbiran dan kemajuan negara"
-            },
-
-            {
-                q: "Apakah agensi utama yang bertanggungjawab membanteras rasuah di Malaysia?",
-                options: [
-                    "A. Polis Diraja Malaysia (PDRM)",
-                    "B. Suruhanjaya Pencegahan Rasuah Malaysia (SPRM)",
-                    "C. Jabatan Imigresen Malaysia",
-                    "D. Jabatan Kastam Diraja Malaysia"
-                ],
-                a: "B. Suruhanjaya Pencegahan Rasuah Malaysia (SPRM)"
-            },
-
-            {
-                q: "Apakah slogan rasmi SPRM?",
-                options: [
-                    "A. Bersih, Cekap dan Amanah",
-                    "B. Rasuah Dihina Maruah Dibina",
-                    "C. Perangi Rasuah Selamanya",
-                    "D. Integriti Teras Kejayaan"
-                ],
-                a: "B. Rasuah Dihina Maruah Dibina"
-            },
-
-            {
-                q: "Apakah nombor talian bebas tol SPRM untuk membuat aduan rasuah?",
-                options: [
-                    "A. 1-800-88-6000",
-                    "B. 1-999-88-5555",
-                    "C. 03-8888-0000",
-                    "D. 999"
-                ],
-                a: "A. 1-800-88-6000"
-            },
-
-            {
-                q: "Antara berikut, yang manakah BUKAN nilai integriti?",
-                options: [
-                    "A. Amanah",
-                    "B. Jujur",
-                    "C. Menipu",
-                    "D. Bertanggungjawab"
-                ],
-                a: "C. Menipu"
-            },
-
-            {
-                q: "Jika seorang pengawas sekolah meminta hadiah wang ringgit daripada murid lain supaya namanya tidak dicatat kerana lewat, tindakan itu dikategorikan sebagai...",
-                options: [
-                    "A. Sedekah",
-                    "B. Rasuah",
-                    "C. Upah",
-                    "D. Hadiah ikhlas"
-                ],
-                a: "B. Rasuah"
-            },
-
-            {
-                q: "Apakah tindakan yang patut anda lakukan jika mendapati rakan sekelas meniru dalam peperiksaan?",
-                options: [
-                    "A. Ikut meniru sekali",
-                    "B. Menasihatinya supaya berbuat jujur dan belajar dengan betul",
-                    "C. Meminta upah kerana merahsiakannya",
-                    "D. Mendiamkan diri dan membiarkan mereka"
-                ],
-                a: "B. Menasihatinya supaya berbuat jujur dan belajar dengan betul"
-            },
-
-            {
-                q: "Apakah kesan buruk jika seseorang mengamalkan rasuah sejak kecil?",
-                options: [
-                    "A. Menjadi seorang pemimpin yang amanah",
-                    "B. Menghancurkan masa depan dan membiasakan diri dengan jenayah",
-                    "C. Disayangi oleh rakan-rakan",
-                    "D. Menjadi murid contoh"
-                ],
-                a: "B. Menghancurkan masa depan dan membiasakan diri dengan jenayah"
-            },
-
-            {
-                q: "Apakah maksud perbuatan 'menyuap'?",
-                options: [
-                    "A. Memberi makanan kepada orang miskin",
-                    "B. Memberi sesuatu (wang, barangan, perkhidmatan) untuk mendapatkan keistimewaan secara tidak sah",
-                    "C. Membantu ibu bapa di dapur",
-                    "D. Memberi hadiah hari jadi kepada guru"
-                ],
-                a: "B. Memberi sesuatu (wang, barangan, perkhidmatan) untuk mendapatkan keistimewaan secara tidak sah"
-            },
-
-            {
-                q: "Mengapakah meniru dalam peperiksaan dianggap sebagai perbuatan melanggar integriti?",
-                options: [
-                    "A. Kerana menggunakan kertas yang banyak",
-                    "B. Kerana ia adalah satu bentuk penipuan untuk mendapat keputusan yang tidak sah",
-                    "C. Kerana ia membuatkan guru marah",
-                    "D. Kerana ia membuang masa"
-                ],
-                a: "B. Kerana ia adalah satu bentuk penipuan untuk mendapat keputusan yang tidak sah"
-            },
-
-            {
-                q: "Sebagai seorang pelajar sekolah, bagaimanakah cara terbaik menunjukkan integriti?",
-                options: [
-                    "A. Datang awal ke sekolah, jujur dalam peperiksaan, dan tidak mengambil hak orang lain",
-                    "B. Menyiapkan kerja sekolah hanya apabila diugut guru",
-                    "C. Berpura-pura baik di hadapan guru sahaja",
-                    "D. Membuli rakan yang lemah"
-                ],
-                a: "A. Datang awal ke sekolah, jujur dalam peperiksaan, dan tidak mengambil hak orang lain"
-            },
-
-            {
-                q: "Apakah hukum menerima atau memberi rasuah dari segi agama dan undang-undang?",
-                options: [
-                    "A. Halal dan dibenarkan",
-                    "B. Haram dan merupakan satu kesalahan jenayah berat",
-                    "C. Perkara biasa dalam pergaulan",
-                    "D. Dibenarkan jika darurat"
-                ],
-                a: "B. Haram dan merupakan satu kesalahan jenayah berat"
-            },
-
-            {
-                q: "Jika anda menemukan dompet beruntung yang mengandungi wang di kantin sekolah, apakah tindakan berintegriti?",
-                options: [
-                    "A. Mengambil wang tersebut dan membuang dompet",
-                    "B. Menyerahkan dompet itu kepada pihak guru atau pejabat sekolah",
-                    "C. Menyimpan wang itu secara diam-diam",
-                    "D. Membeli makanan untuk kawan-kawan"
-                ],
-                a: "B. Menyerahkan dompet itu kepada pihak guru atau pejabat sekolah"
-            },
-
-            {
-                q: "Apakah maksud sifat 'amanah'?",
-                options: [
-                    "A. Sifat suka bercakap besar",
-                    "B. Bertanggungjawab dan memegang kepercayaan yang diberikan dengan jujur",
-                    "C. Bersikap pentingkan diri sendiri",
-                    "D. Takut kepada orang lain"
-                ],
-                a: "B. Bertanggungjawab dan memegang kepercayaan yang diberikan dengan jujur"
-            },
-
-            {
-                q: "Mengapakah kita tidak boleh mengambil hak milik rakan sekelas tanpa kebenaran?",
-                options: [
-                    "A. Kerana ia adalah salah di sisi moral dan undang-undang (mencuri)",
-                    "B. Kerana barang tersebut mungkin murah",
-                    "C. Kerana guru tidak nampak",
-                    "D. Kerana boleh dipulaukan kawan"
-                ],
-                a: "A. Kerana ia adalah salah di sisi moral dan undang-undang (mencuri)"
-            },
-
-            {
-                q: "Apakah peranan Kelab Pencegahan Rasuah (KPR) di sekolah?",
-                options: [
-                    "A. Menganjurkan aktiviti perniagaan haram",
-                    "B. Memberi kesedaran, membudayakan integriti dan menolak rasuah dalam kalangan murid",
-                    "C. Menghukum murid yang lewat",
-                    "D. Mengutip derma untuk kelab"
-                ],
-                a: "B. Memberi kesedaran, membudayakan integriti dan menolak rasuah dalam kalangan murid"
-            },
-
-            {
-                q: "Apakah yang dimaksudkan dengan konflik kepentingan (conflict of interest)?",
-                options: [
-                    "A. Bergaduh dengan kawan di padang",
-                    "B. Situasi di mana kepentingan peribadi bercanggah dengan tugas rasmi",
-                    "C. Perbezaan pendapat semasa mesyuarat",
-                    "D. Masalah keluarga di rumah"
-                ],
-                a: "B. Situasi di mana kepentingan peribadi bercanggah dengan tugas rasmi"
-            },
-
-            {
-                q: "Bagaimanakah cara menolak ajakan rakan untuk melakukan perkara yang tidak berintegriti?",
-                options: [
-                    "A. Mengikut sahaja supaya tidak disisihkan",
-                    "B. Menolak secara tegas dan berani serta memberitahu akibat buruknya",
-                    "C. Diam diri dan lari",
-                    "D. Memarahi rakan dengan kasar"
-                ],
-                a: "B. Menolak secara tegas dan berani serta memberitahu akibat buruknya"
-            },
-
-            {
-                q: "Apakah nilai murni yang dapat dilahirkan melalui amalan hidup bebas rasuah?",
-                options: [
-                    "A. Keadilan, kesejahteraan, dan kepercayaan masyarakat",
-                    "B. Kezaliman",
-                    "C. Penipuan berterusan",
-                    "D. Ketakutan"
-                ],
-                a: "A. Keadilan, kesejahteraan, dan kepercayaan masyarakat"
-            },
-
-            {
-                q: "Siapakah yang boleh menjadi mangsa utama jika rasuah berleluasa dalam masyarakat?",
-                options: [
-                    "A. Golongan yang tidak bersalah dan rakyat yang memerlukan keadilan",
-                    "B. Perasuah itu sendiri",
-                    "C. Pihak yang memberi suapan",
-                    "D. Tiada siapa yang terjejas"
-                ],
-                a: "A. Golongan yang tidak bersalah dan rakyat yang memerlukan keadilan"
-            },
-
-            {
-                q: "Apakah tindakan yang patut diambil jika ada individu menawarkan wang suapan kepada anda?",
-                options: [
-                    "A. Terima dengan senyap",
-                    "B. Tolak dengan tegas dan laporkan kepada pihak berkuasa atau guru",
-                    "C. Minta lebih banyak wang",
-                    "D. Simpan sebagai rahsia"
-                ],
-                a: "B. Tolak dengan tegas dan laporkan kepada pihak berkuasa atau guru"
-            },
-
-            {
-                q: "Apakah maksud 'akauntabiliti' dalam konteks integriti?",
-                options: [
-                    "A. Bertanggungjawab atas setiap tindakan dan keputusan yang dibuat",
-                    "B. Menyalahkan orang lain atas kesilapan sendiri",
-                    "C. Lepas tangan dalam tugasan",
-                    "D. Mengabaikan arahan ketua"
-                ],
-                a: "A. Bertanggungjawab atas setiap tindakan dan keputusan yang dibuat"
-            },
-
-            {
-                q: "Mengapakah sifat jujur penting dalam persahabatan?",
-                options: [
-                    "A. Supaya kita boleh menipu kawan",
-                    "B. Untuk membina kepercayaan yang kukuh antara satu sama lain",
-                    "C. Supaya kawan memberi kita hadiah mahal",
-                    "D. Tiada kepentingan"
-                ],
-                a: "B. Untuk membina kepercayaan yang kukuh antara satu sama lain"
-            },
-
-            {
-                q: "Apakah yang dimaksudkan dengan ketelusan (transparency)?",
-                options: [
-                    "A. Menyembunyikan maklumat penting",
-                    "B. Menjalankan tugas atau urusan dengan terbuka, jujur, dan boleh disemak",
-                    "C. Melakukan sesuatu secara sembunyi-sembunyi",
-                    "D. Menutup kesalahan rakan"
-                ],
-                a: "B. Menjalankan tugas atau urusan dengan terbuka, jujur, dan boleh disemak"
-            },
-
-            {
-                q: "Apakah bentuk hukuman utama kepada pesalah rasuah di bawah undang-undang Malaysia?",
-                options: [
-                    "A. Denda yang tinggi dan hukuman penjara",
-                    "B. Diberi cuti panjang",
-                    "C. Nasihat sahaja",
-                    "D. Amaran bertulis pertama"
-                ],
-                a: "A. Denda yang tinggi dan hukuman penjara"
-            },
-
-            {
-                q: "Bagaimanakah kita boleh mengamalkan integriti dalam penggunaan media sosial?",
-                options: [
-                    "A. Menyebarkan berita palsu demi suka-suka",
-                    "B. Tidak menyebarkan fitnah, berita palsu, atau maklumat tidak sahih",
-                    "C. Mencaci orang lain secara bebas",
-                    "D. Mencuri akaun media sosial rakan"
-                ],
-                a: "B. Tidak menyebarkan fitnah, berita palsu, atau maklumat tidak sahih"
-            },
-
-            {
-                q: "Apakah peranan ibu bapa dalam membentuk integriti anak-anak?",
-                options: [
-                    "A. Menunjukkan teladan yang baik dan mendidik anak nilai kejujuran",
-                    "B. Membiarkan anak-anak berbuat sesuka hati",
-                    "C. Menggalakkan anak menipu demi kejayaan",
-                    "D. Tidak mempedulikan didikan moral"
-                ],
-                a: "A. Menunjukkan teladan yang baik dan mendidik anak nilai kejujuran"
-            },
-
-            {
-                q: "Apakah akibat kepada negara jika pemimpinnya mengamalkan rasuah?",
-                options: [
-                    "A. Negara akan maju dengan cepat",
-                    "B. Ekonomi merosot, rakyat terbeban, dan imej negara terjejas",
-                    "C. Rakyat hidup lebih harmoni",
-                    "D. Pembangunan infrastruktur bertambah baik"
-                ],
-                a: "B. Ekonomi merosot, rakyat terbeban, dan imej negara terjejas"
-            },
-
-            {
-                q: "Apakah maksud integriti menurut etika kerja penjawat awam?",
-                options: [
-                    "A. Melaksanakan tugas dengan penuh tanggungjawab tanpa kepentingan peribadi atau rasuah",
-                    "B. Datang lewat ke pejabat",
-                    "C. Mengutamakan keluarga dalam urusan pejabat",
-                    "D. Menerima hadiah lumayan daripada kontraktor"
-                ],
-                a: "A. Melaksanakan tugas dengan penuh tanggungjawab tanpa kepentingan peribadi atau rasuah"
-            },
-
-            {
-                q: "Mengapakah aktiviti rasuah sukar dikesan jika tiada laporan daripada masyarakat?",
-                options: [
-                    "A. Kerana ia dilakukan secara rahsia dan persetujuan kedua-dua pihak (pemberi dan penerima)",
-                    "B. Kerana ia diiklankan di televisyen",
-                    "C. Kerana tiada undang-undang berkaitan",
-                    "D. Kerana ia dilakukan secara terbuka"
-                ],
-                a: "A. Kerana ia dilakukan secara rahsia dan persetujuan kedua-dua pihak (pemberi dan penerima)"
-            },
-
-            {
-                q: "Apakah tindakan awal yang perlu dilakukan sekiranya anda melihat kes rasuah di persekitaran anda?",
-                options: [
-                    "A. Ikut serta melakukan rasuah",
-                    "B. Membuat laporan rasmi kepada SPRM atau pihak berkuasa",
-                    "C. Memviralkan video tanpa usul periksa",
-                    "D. Berdiam diri kerana takut"
-                ],
-                a: "B. Membuat laporan rasmi kepada SPRM atau pihak berkuasa"
-            },
-
-            {
-                q: "Apakah yang dimaksudkan dengan 'pemberi maklumat' (whistleblower)?",
-                options: [
-                    "A. Individu yang meniup wisel di padang bola",
-                    "B. Individu yang mendedahkan maklumat mengenai perlakuan jenayah atau rasuah",
-                    "C. Individu yang merancang rasuah",
-                    "D. Individu yang menyembunyikan penipuan"
-                ],
-                a: "B. Individu yang mendedahkan maklumat mengenai perlakuan jenayah atau rasuah"
-            },
-
-            {
-                q: "Bagaimanakah undang-undang melindungi pemberi maklumat rasuah di Malaysia?",
-                options: [
-                    "A. Melalui Akta Perlindungan Pemberi Maklumat 2010 yang menjaga keselamatan pemberi maklumat",
-                    "B. Tiada perlindungan diberikan",
-                    "C. Mendedahkan nama pemberi kepada umum",
-                    "D. Mengenakan denda kepada pemberi maklumat"
-                ],
-                a: "A. Melalui Akta Perlindungan Pemberi Maklumat 2010 yang menjaga keselamatan pemberi maklumat"
-            },
-
-            {
-                q: "Apakah kaitan antara rasuah dan keruntuhan moral?",
-                options: [
-                    "A. Rasuah mencerminkan hilangnya nilai moral, sifat tamak, dan hilang pegangan agama",
-                    "B. Tiada kaitan langsung",
-                    "C. Rasuah memperkukuh moral seseorang",
-                    "D. Rasuah tanda kejayaan individu"
-                ],
-                a: "A. Rasuah mencerminkan hilangnya nilai moral, sifat tamak, dan hilang pegangan agama"
-            },
-
-            {
-                q: "Apakah peranan media massa dalam membanteras rasuah?",
-                options: [
-                    "A. Menyebarkan kempen kesedaran anti-rasuah dan mendedahkan isu integriti kepada masyarakat",
-                    "B. Menggalakkan budaya memberi hadiah lumayan",
-                    "C. Menyembunyikan kes rasuah besar",
-                    "D. Menghiburkan penonton semata-mata"
-                ],
-                a: "A. Menyebarkan kempen kesedaran anti-rasuah dan mendedahkan isu integriti kepada masyarakat"
-            },
-
-            {
-                q: "Mengapakah perbuatan 'tuduhan palsu' terhadap seseorang berkaitan kes rasuah adalah salah?",
-                options: [
-                    "A. Kerana ia boleh merosakkan maruah dan nama baik individu yang tidak bersalah",
-                    "B. Kerana ia membuang masa SPRM sahaja",
-                    "C. Kerana tiada denda dikenakan",
-                    "D. Kerana ia dibenarkan undang-undang"
-                ],
-                a: "A. Kerana ia boleh merosakkan maruah dan nama baik individu yang tidak bersalah"
-            },
-
-            {
-                q: "Apakah maksud 'sogokan' dalam konteks kesalahan rasuah?",
-                options: [
-                    "A. Pemberian ikhlas tanpa syarat",
-                    "B. Pemberian berbentuk wang atau barangan untuk mempengaruhi keputusan atau tindakan seseorang",
-                    "C. Bantuan kecemasan mangsa bencana",
-                    "D. Upah kerja yang sah di sisi undang-undang"
-                ],
-                a: "B. Pemberian berbentuk wang atau barangan untuk mempengaruhi keputusan atau tindakan seseorang"
-            },
-
-            {
-                q: "Bagaimanakah cara kita memupuk semangat benci kepada rasuah sejak di bangku sekolah?",
-                options: [
-                    "A. Melalui pendidikan sivik, ceramah integriti, dan mengamalkan kejujuran harian",
-                    "B. Menunggu hingga dewasa baru belajar mengenainya",
-                    "C. Menganggap rasuah perkara remeh",
-                    "D. Tidak mengambil tahu isu semasa"
-                ],
-                a: "A. Melalui pendidikan sivik, ceramah integriti, dan mengamalkan kejujuran harian"
-            },
-
-            {
-                q: "Apakah kesan kepada kualiti projek pembangunan negara jika berlaku penyelewengan dan rasuah?",
-                options: [
-                    "A. Projek terbengkalai, cepat rosak, membazirkan wang rakyat, dan membahayakan keselamatan",
-                    "B. Projek menjadi lebih kukuh dan tahan lasak",
-                    "C. Kos pembinaan menjadi lebih murah",
-                    "D. Siap lebih awal dari jadual"
-                ],
-                a: "A. Projek terbengkalai, cepat rosak, membazirkan wang rakyat, dan membahayakan keselamatan"
-            },
-
-            {
-                q: "Mengapakah integriti penting bagi seseorang pemimpin organisasi?",
-                options: [
-                    "A. Supaya dihormati, dipercayai, dan membawa organisasi ke arah kecemerlangan tanpa penyelewengan",
-                    "B. Supaya boleh mengambil harta organisasi",
-                    "C. Supaya bebas membuat keputusan tanpa had",
-                    "D. Supaya disukai kawan rapat sahaja"
-                ],
-                a: "A. Supaya dihormati, dipercayai, dan membawa organisasi ke arah kecemerlangan tanpa penyelewengan"
-            },
-
-            {
-                q: "Apakah perbezaan utama antara 'hadiah yang sah' dan 'rasuah'?",
-                options: [
-                    "A. Hadiah diberikan secara ikhlas tanpa mengharapkan apa-apa balasan atau urusan rasmi, manakala rasuah bersyarat untuk mempengaruhi keputusan",
-                    "B. Tiada perbezaan langsung",
-                    "C. Rasuah bernilai lebih murah daripada hadiah",
-                    "D. Hadiah hanya diberikan kepada pegawai kerajaan sahaja"
-                ],
-                a: "A. Hadiah diberikan secara ikhlas tanpa mengharapkan apa-apa balasan atau urusan rasmi, manakala rasuah bersyarat untuk mempengaruhi keputusan"
-            },
-
-            {
-                q: "Apakah ikrar utama yang harus dipegang oleh setiap rakyat Malaysia dalam usaha membanteras rasuah?",
-                options: [
-                    "A. Berikrar untuk menolak rasuah demi agama, bangsa, dan negara tercinta",
-                    "B. Berikrar untuk menutup sebelah mata",
-                    "C. Berikrar menyembunyikan maklumat rasuah",
-                    "D. Berikrar mengambil peluang kesempitan"
-                ],
-                a: "A. Berikrar untuk menolak rasuah demi agama, bangsa, dan negara tercinta"
-            }
-
+            { q: "Apakah maksud integriti secara umum?", options: ["A. Perangai yang suka marah", "B. Sifat jujur dan berpegang kepada prinsip moral yang tinggi", "C. Kepandaian dalam akademik", "D. Kecekapan fizikal"], a: "B. Sifat jujur dan berpegang kepada prinsip moral yang tinggi" },
+            { q: "Mengapakah rasuah dianggap sebagai musuh nombor satu negara?", options: ["A. Kerana ia merosakkan pentadbiran dan kemajuan negara", "B. Kerana ia menyusahkan guru di sekolah", "C. Kerana ia hanya melibatkan golongan kaya", "D. Kerana ia tidak ada dalam undang-undang"], a: "A. Kerana ia merosakkan pentadbiran dan kemajuan negara" },
+            { q: "Apakah agensi utama yang bertanggungjawab membanteras rasuah di Malaysia?", options: ["A. Polis Diraja Malaysia (PDRM)", "B. Suruhanjaya Pencegahan Rasuah Malaysia (SPRM)", "C. Jabatan Imigresen Malaysia", "D. Jabatan Kastam Diraja Malaysia"], a: "B. Suruhanjaya Pencegahan Rasuah Malaysia (SPRM)" },
+            { q: "Apakah slogan rasmi SPRM?", options: ["A. Bersih, Cekap dan Amanah", "B. Rasuah Dihina Maruah Dibina", "C. Perangi Rasuah Selamanya", "D. Integriti Teras Kejayaan"], a: "B. Rasuah Dihina Maruah Dibina" },
+            { q: "Apakah nombor talian bebas tol SPRM untuk membuat aduan rasuah?", options: ["A. 1-800-88-6000", "B. 1-999-88-5555", "C. 03-8888-0000", "D. 999"], a: "A. 1-800-88-6000" }
         ],
-
         penjawat_awam: [
-
-            {
-                q: "Adakah penjawat awam wajib membuat pengisytiharan harta kepada ketua jabatan mengikut peraturan semasa?",
-                options: [
-                    "A. Ya",
-                    "B. Tidak",
-                    "C. Bergantung kepada budi bicara individu",
-                    "D. Hanya jika diminta oleh media"
-                ],
-                a: "A. Ya"
-            },
-
-            {
-                q: "Adakah pegawai kerajaan dibenarkan menerima hadiah bernilai tinggi daripada pihak yang mempunyai urusan rasmi?",
-                options: [
-                    "A. Ya, jika diizinkan keluarga",
-                    "B. Tidak",
-                    "C. Boleh, asalkan secara sembunyi",
-                    "D. Bergantung pada budi bicara pemberi"
-                ],
-                a: "B. Tidak"
-            },
-
-            {
-                q: "Adakah perbuatan meminta atau menerima balasan wang bagi meluluskan projek kerajaan dikira kesalahan rasuah?",
-                options: [
-                    "A. Ya",
-                    "B. Tidak",
-                    "C. Dibenarkan jika darurat",
-                    "D. Bergantung pada jumlah wang"
-                ],
-                a: "A. Ya"
-            }
-
+            { q: "Adakah penjawat awam wajib membuat pengisytiharan harta kepada ketua jabatan mengikut peraturan semasa?", options: ["A. Ya", "B. Tidak", "C. Bergantung kepada budi bicara individu", "D. Hanya jika diminta oleh media"], a: "A. Ya" },
+            { q: "Adakah pegawai kerajaan dibenarkan menerima hadiah bernilai tinggi daripada pihak yang mempunyai urusan rasmi?", options: ["A. Ya, jika diizinkan keluarga", "B. Tidak", "C. Boleh, asalkan secara sembunyi", "D. Bergantung pada budi bicara pemberi"], a: "B. Tidak" }
         ],
-
         awam: [
-
-            {
-                q: "Adakah syarikat swasta boleh didakwa jika pekerja memberi suapan atas nama syarikat (Liabiliti Korporat)?",
-                options: [
-                    "A. Ya",
-                    "B. Tidak",
-                    "C. Hanya jika syarikat berdaftar di luar negara",
-                    "D. Bergantung kepada keuntungan syarikat"
-                ],
-                a: "A. Ya"
-            },
-
-            {
-                q: "Adakah aduan rasuah boleh dibuat secara rahsia melalui portal rasmi atau saluran aduan SPRM?",
-                options: [
-                    "A. Ya",
-                    "B. Tidak",
-                    "C. Mesti dihebahkan kepada umum",
-                    "D. Hanya melalui surat berdaftar"
-                ],
-                a: "A. Ya"
-            },
-
-            {
-                q: "Adakah memberi duit kopi kepada penguat kuasa untuk meloloskan diri daripada saman dikira rasuah?",
-                options: [
-                    "A. Ya",
-                    "B. Tidak",
-                    "C. Dibenarkan sebagai sedekah jalanan",
-                    "D. Dianggap sebagai denda biasa"
-                ],
-                a: "A. Ya"
-            }
-
+            { q: "Adakah syarikat swasta boleh didakwa jika pekerja memberi suapan atas nama syarikat (Liabiliti Korporat)?", options: ["A. Ya", "B. Tidak", "C. Hanya jika syarikat berdaftar di luar negara", "D. Bergantung kepada keuntungan syarikat"], a: "A. Ya" },
+            { q: "Adakah aduan rasuah boleh dibuat secara rahsia melalui portal rasmi atau saluran aduan SPRM?", options: ["A. Ya", "B. Tidak", "C. Mesti dihebahkan kepada umum", "D. Hanya melalui surat berdaftar"], a: "A. Ya" }
         ]
-
     };
-
 
     let activeMode = 'pelajar';
     let tempSelectedMode = 'pelajar';
@@ -1365,1340 +576,393 @@
     let selectedPrizeObj = null;
     let currentCorrectAnswer = '';
 
-
     let sectors = [
-
         { line1: "SET ALAT", line2: "TULIS", stock: 0 },
         { line1: "BUKU", line2: "NOTA", stock: 0 },
         { line1: "PEN", line2: "", stock: 0 },
         { line1: "KEY", line2: "CHAIN", stock: 0 },
         { line1: "TUMBLER", line2: "", stock: 0 },
         { line1: "HADIAH", line2: "UTAMA", stock: 0 }
-
     ];
 
-
     let audioCtx = null;
-
-
     function initAudio() {
-
         if (!audioCtx) {
-
-            audioCtx =
-                new (window.AudioContext ||
-                     window.webkitAudioContext)();
-
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
-
     }
-
 
     function playTickSound() {
-
         initAudio();
-
         if (!audioCtx) return;
-
         try {
-
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-
             osc.type = 'triangle';
-
-            osc.frequency.setValueAtTime(
-                400,
-                audioCtx.currentTime
-            );
-
-            osc.frequency.exponentialRampToValueAtTime(
-                800,
-                audioCtx.currentTime + 0.05
-            );
-
-            gain.gain.setValueAtTime(
-                0.5,
-                audioCtx.currentTime
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.001,
-                audioCtx.currentTime + 0.05
-            );
-
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-
             osc.start();
             osc.stop(audioCtx.currentTime + 0.05);
-
         } catch(e) {}
-
     }
-
 
     function playWinSound() {
-
         initAudio();
-
         if (!audioCtx) return;
-
         try {
-
-            const notes = [
-                523.25,
-                659.25,
-                783.99,
-                1046.50,
-                1318.51,
-                1567.98
-            ];
-
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
             notes.forEach((note, index) => {
-
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-
-                osc.type =
-                    index === notes.length - 1
-                    ? 'sine'
-                    : 'triangle';
-
-                osc.frequency.setValueAtTime(
-                    note,
-                    audioCtx.currentTime + index * 0.1
-                );
-
-                gain.gain.setValueAtTime(
-                    0.35,
-                    audioCtx.currentTime + index * 0.1
-                );
-
-                gain.gain.exponentialRampToValueAtTime(
-                    0.001,
-                    audioCtx.currentTime + index * 0.1 + 0.35
-                );
-
+                osc.type = index === notes.length - 1 ? 'sine' : 'triangle';
+                osc.frequency.setValueAtTime(note, audioCtx.currentTime + index * 0.1);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.1 + 0.35);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-
-                osc.start(
-                    audioCtx.currentTime + index * 0.1
-                );
-
-                osc.stop(
-                    audioCtx.currentTime + index * 0.1 + 0.35
-                );
-
+                osc.start(audioCtx.currentTime + index * 0.1);
+                osc.stop(audioCtx.currentTime + index * 0.1 + 0.35);
             });
-
         } catch(e) {}
-
     }
-
 
     let startAngle = 0;
     let isSpinning = false;
-
-    const canvas =
-        document.getElementById('wheel');
-
-    const ctx =
-        canvas.getContext('2d');
-
-    const arc =
-        Math.PI / (sectors.length / 2);
-
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const arc = Math.PI / (sectors.length / 2);
 
     function drawWheel() {
-
         ctx.clearRect(0, 0, 500, 500);
-
         const centerX = 250;
         const centerY = 250;
         const outerRadius = 240;
         const wheelRadius = 210;
 
-
-        const goldGradient =
-            ctx.createLinearGradient(0, 0, 500, 500);
-
+        const goldGradient = ctx.createLinearGradient(0, 0, 500, 500);
         goldGradient.addColorStop(0, '#ffe87c');
         goldGradient.addColorStop(0.3, '#d4af37');
         goldGradient.addColorStop(0.7, '#f39c12');
         goldGradient.addColorStop(1, '#996515');
 
-
         ctx.beginPath();
-
-        ctx.arc(
-            centerX,
-            centerY,
-            outerRadius,
-            0,
-            2 * Math.PI
-        );
-
-
-        const rimGrad =
-            ctx.createRadialGradient(
-                centerX - 60,
-                centerY - 60,
-                20,
-                centerX,
-                centerY,
-                outerRadius
-            );
-
-        rimGrad.addColorStop(0, '#ff4d4d');
-        rimGrad.addColorStop(0.5, '#ff0000');
-        rimGrad.addColorStop(1, '#990000');
+        ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
+        
+        const rimGrad = ctx.createRadialGradient(centerX - 60, centerY - 60, 20, centerX, centerY, outerRadius);
+        rimGrad.addColorStop(0, '#333333');
+        rimGrad.addColorStop(0.5, '#1a1a1a');
+        rimGrad.addColorStop(1, '#050505');
 
         ctx.fillStyle = rimGrad;
         ctx.fill();
-
-        ctx.lineWidth = 7;
+        ctx.lineWidth = 4;
         ctx.strokeStyle = goldGradient;
         ctx.stroke();
 
-
         ctx.save();
-
         ctx.translate(centerX, centerY);
         ctx.rotate(startAngle);
 
-
         for (let i = 0; i < sectors.length; i++) {
-
             const angle = i * arc;
-
-
             ctx.beginPath();
-
             ctx.moveTo(0, 0);
-
-            ctx.arc(
-                0,
-                0,
-                wheelRadius,
-                angle,
-                angle + arc,
-                false
-            );
-
+            ctx.arc(0, 0, wheelRadius, angle, angle + arc, false);
             ctx.lineTo(0, 0);
 
-
-            const sliceGrad =
-                ctx.createRadialGradient(
-                    0,
-                    0,
-                    10,
-                    0,
-                    0,
-                    wheelRadius
-                );
-
-
+            const sliceGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, wheelRadius);
             if (i % 2 === 0) {
-
-                sliceGrad.addColorStop(
-                    0,
-                    '#e63946'
-                );
-
-                sliceGrad.addColorStop(
-                    1,
-                    '#4a050c'
-                );
-
+                sliceGrad.addColorStop(0, '#1c1c1c');
+                sliceGrad.addColorStop(1, '#080808');
             } else {
-
-                sliceGrad.addColorStop(
-                    0,
-                    '#fffae6'
-                );
-
-                sliceGrad.addColorStop(
-                    1,
-                    '#bfa86f'
-                );
-
+                sliceGrad.addColorStop(0, '#e6c65c');
+                sliceGrad.addColorStop(1, '#997a15');
             }
-
 
             ctx.fillStyle = sliceGrad;
             ctx.fill();
-
             ctx.strokeStyle = goldGradient;
             ctx.lineWidth = 4;
             ctx.stroke();
 
-
             ctx.save();
-
-
-            let textGrad =
-                ctx.createLinearGradient(
-                    0,
-                    -25,
-                    0,
-                    25
-                );
-
-
+            let textGrad = ctx.createLinearGradient(0, -25, 0, 25);
             if (i % 2 === 0) {
-
-                textGrad.addColorStop(
-                    0,
-                    "#f9f6ee"
-                );
-
-                textGrad.addColorStop(
-                    1,
-                    "#e6dbc2"
-                );
-
+                textGrad.addColorStop(0, "#ffd700");
+                textGrad.addColorStop(1, "#cca100");
                 ctx.fillStyle = textGrad;
-
-                ctx.shadowColor =
-                    "rgba(0, 0, 0, 0.9)";
-
+                ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
             } else {
-
-                textGrad.addColorStop(
-                    0,
-                    "#5a0000"
-                );
-
-                textGrad.addColorStop(
-                    1,
-                    "#3b0a10"
-                );
-
+                textGrad.addColorStop(0, "#111111");
+                textGrad.addColorStop(1, "#000000");
                 ctx.fillStyle = textGrad;
-
-                ctx.shadowColor =
-                    "rgba(255, 255, 255, 0.8)";
-
+                ctx.shadowColor = "rgba(255, 215, 0, 0.5)";
             }
-
 
             ctx.shadowBlur = 6;
+            ctx.translate(Math.cos(angle + arc / 2) * 125, Math.sin(angle + arc / 2) * 125);
+            ctx.rotate(angle + arc / 2 + Math.PI / 2);
+            ctx.font = "900 16px 'Segoe UI', Tahoma, sans-serif";
 
-
-            ctx.translate(
-                Math.cos(angle + arc / 2) * 125,
-                Math.sin(angle + arc / 2) * 125
-            );
-
-
-            ctx.rotate(
-                angle + arc / 2 + Math.PI / 2
-            );
-
-
-            ctx.font =
-                "900 16px 'Segoe UI', Tahoma, sans-serif";
-
-
-            ctx.fillText(
-                sectors[i].line1,
-                -ctx.measureText(
-                    sectors[i].line1
-                ).width / 2,
-                -6
-            );
-
-
+            ctx.fillText(sectors[i].line1, -ctx.measureText(sectors[i].line1).width / 2, -6);
             if (sectors[i].line2) {
-
-                ctx.fillText(
-                    sectors[i].line2,
-                    -ctx.measureText(
-                        sectors[i].line2
-                    ).width / 2,
-                    16
-                );
-
+                ctx.fillText(sectors[i].line2, -ctx.measureText(sectors[i].line2).width / 2, 16);
             }
-
-
             ctx.restore();
-
         }
 
-
         ctx.save();
-
         ctx.beginPath();
-
-        ctx.arc(
-            0,
-            0,
-            wheelRadius,
-            0,
-            2 * Math.PI
-        );
-
-
-        const glassGrad =
-            ctx.createLinearGradient(
-                -wheelRadius,
-                -wheelRadius,
-                wheelRadius,
-                wheelRadius
-            );
-
-        glassGrad.addColorStop(
-            0,
-            'rgba(255, 255, 255, 0.3)'
-        );
-
-        glassGrad.addColorStop(
-            0.48,
-            'rgba(255, 255, 255, 0.05)'
-        );
-
-        glassGrad.addColorStop(
-            0.52,
-            'rgba(0, 0, 0, 0.05)'
-        );
-
-        glassGrad.addColorStop(
-            1,
-            'rgba(0, 0, 0, 0.25)'
-        );
-
+        ctx.arc(0, 0, wheelRadius, 0, 2 * Math.PI);
+        const glassGrad = ctx.createLinearGradient(-wheelRadius, -wheelRadius, wheelRadius, wheelRadius);
+        glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+        glassGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.02)');
+        glassGrad.addColorStop(1, 'rgba(0, 0, 0, 0.3)');
         ctx.fillStyle = glassGrad;
         ctx.fill();
-
         ctx.restore();
-
-
-        ctx.save();
-
-        ctx.beginPath();
-
-        ctx.arc(
-            0,
-            0,
-            wheelRadius,
-            0,
-            2 * Math.PI
-        );
-
-
-        const innerShadow =
-            ctx.createRadialGradient(
-                0,
-                0,
-                wheelRadius * 0.55,
-                0,
-                0,
-                wheelRadius
-            );
-
-        innerShadow.addColorStop(
-            0,
-            'rgba(0, 0, 0, 0)'
-        );
-
-        innerShadow.addColorStop(
-            0.8,
-            'rgba(0, 0, 0, 0.2)'
-        );
-
-        innerShadow.addColorStop(
-            1,
-            'rgba(0, 0, 0, 0.6)'
-        );
-
-        ctx.fillStyle = innerShadow;
-        ctx.fill();
-
-        ctx.restore();
-
 
         const numBulbs = 16;
-
-        const timeNow =
-            Date.now() * 0.005;
-
-
+        const timeNow = Date.now() * 0.005;
         for (let i = 0; i < numBulbs; i++) {
-
-            const angle =
-                (i * 2 * Math.PI) / numBulbs;
-
-
-            const bulbX =
-                (outerRadius - 13) *
-                Math.cos(angle);
-
-            const bulbY =
-                (outerRadius - 13) *
-                Math.sin(angle);
-
-
-            const sparkle =
-                Math.sin(
-                    timeNow * 3 + i * 0.8
-                );
-
-
-            const bulbRadius =
-                8.5 + sparkle * 2.5;
-
-            const glowBlurSize =
-                10 + sparkle * 6;
-
-
-            const isWhite =
-                (i + Math.floor(
-                    Date.now() / 250
-                )) % 2 === 0;
-
-
+            const angle = (i * 2 * Math.PI) / numBulbs;
+            const bulbX = (outerRadius - 13) * Math.cos(angle);
+            const bulbY = (outerRadius - 13) * Math.sin(angle);
+            const sparkle = Math.sin(timeNow * 3 + i * 0.8);
+            const bulbRadius = 8.5 + sparkle * 2.5;
+            
             ctx.beginPath();
+            ctx.arc(bulbX, bulbY, Math.max(3.5, bulbRadius), 0, 2 * Math.PI);
+            const bulbGrad = ctx.createRadialGradient(bulbX - 1, bulbY - 1, 0.2, bulbX, bulbY, Math.max(3.5, bulbRadius));
+            bulbGrad.addColorStop(0, '#ffffc0');
+            bulbGrad.addColorStop(0.5, '#ffd700');
+            bulbGrad.addColorStop(1, '#b8860b');
 
-            ctx.arc(
-                bulbX,
-                bulbY,
-                Math.max(3.5, bulbRadius),
-                0,
-                2 * Math.PI
-            );
-
-
-            const bulbGrad =
-                ctx.createRadialGradient(
-                    bulbX - 1,
-                    bulbY - 1,
-                    0.2,
-                    bulbX,
-                    bulbY,
-                    Math.max(3.5, bulbRadius)
-                );
-
-
-            if (isWhite) {
-
-                bulbGrad.addColorStop(
-                    0,
-                    '#ffffff'
-                );
-
-                bulbGrad.addColorStop(
-                    0.5,
-                    '#e0f7fa'
-                );
-
-                bulbGrad.addColorStop(
-                    1,
-                    '#80deea'
-                );
-
-                ctx.shadowColor =
-                    "#ffffff";
-
-            } else {
-
-                bulbGrad.addColorStop(
-                    0,
-                    '#ffffa3'
-                );
-
-                bulbGrad.addColorStop(
-                    0.5,
-                    '#ffd700'
-                );
-
-                bulbGrad.addColorStop(
-                    1,
-                    '#ff8c00'
-                );
-
-                ctx.shadowColor =
-                    "#ffd700";
-
-            }
-
-
-            ctx.shadowBlur =
-                Math.max(4, glowBlurSize);
-
+            ctx.shadowColor = "#ffd700";
+            ctx.shadowBlur = 10;
             ctx.fillStyle = bulbGrad;
             ctx.fill();
-
             ctx.shadowBlur = 0;
-
         }
-
-
         ctx.restore();
 
-
         ctx.beginPath();
+        ctx.arc(centerX, centerY, 32, 0, 2 * Math.PI);
+        const centerGradient = ctx.createRadialGradient(centerX - 10, centerY - 10, 3, centerX, centerY, 32);
+        centerGradient.addColorStop(0, '#fffae6');
+        centerGradient.addColorStop(0.4, '#ffd700');
+        centerGradient.addColorStop(1, '#6e5004');
 
-        ctx.arc(
-            centerX,
-            centerY,
-            32,
-            0,
-            2 * Math.PI
-        );
-
-
-        const centerGradient =
-            ctx.createRadialGradient(
-                centerX - 10,
-                centerY - 10,
-                3,
-                centerX,
-                centerY,
-                32
-            );
-
-
-        centerGradient.addColorStop(
-            0,
-            '#fffae6'
-        );
-
-        centerGradient.addColorStop(
-            0.3,
-            '#ffd700'
-        );
-
-        centerGradient.addColorStop(
-            0.7,
-            '#d4af37'
-        );
-
-        centerGradient.addColorStop(
-            1,
-            '#8b6508'
-        );
-
-
-        ctx.fillStyle =
-            centerGradient;
-
+        ctx.fillStyle = centerGradient;
         ctx.fill();
-
         ctx.lineWidth = 4;
-        ctx.strokeStyle = "#fff";
+        ctx.strokeStyle = "#e6c65c";
         ctx.stroke();
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            centerX - 8,
-            centerY - 8,
-            8,
-            0,
-            2 * Math.PI
-        );
-
-        ctx.fillStyle =
-            "rgba(255, 255, 255, 0.6)";
-
-        ctx.fill();
-
     }
-
 
     function renderLoop() {
-
         drawWheel();
-
-        requestAnimationFrame(
-            renderLoop
-        );
-
+        requestAnimationFrame(renderLoop);
     }
-
 
     function renderStockInputs() {
-
-        const container =
-            document.getElementById(
-                'stock-inputs-container'
-            );
-
+        const container = document.getElementById('stock-inputs-container');
         container.innerHTML = '';
-
-
         sectors.forEach((sec, idx) => {
-
-            const name =
-                `${sec.line1} ${sec.line2}`.trim();
-
-
-            const div =
-                document.createElement('div');
-
-
+            const name = `${sec.line1} ${sec.line2}`.trim();
+            const div = document.createElement('div');
             div.style.display = 'flex';
-
-            div.style.justifyContent =
-                'space-between';
-
-            div.style.alignItems =
-                'center';
-
-            div.style.background =
-                'rgba(0,0,0,0.3)';
-
-            div.style.padding =
-                '6px 10px';
-
-            div.style.borderRadius =
-                '8px';
-
-            div.style.border =
-                '1px solid rgba(255,215,0,0.2)';
-
-
+            div.style.justifyContent = 'space-between';
+            div.style.alignItems = 'center';
+            div.style.background = 'rgba(255,255,255,0.03)';
+            div.style.padding = '6px 10px';
+            div.style.borderRadius = '8px';
+            div.style.border = '1px solid rgba(255,215,0,0.2)';
             div.innerHTML = `
-
-                <span style="
-                    font-size:0.85rem;
-                    font-weight:600;
-                    color:#ffd700;
-                ">
-                    ${name}
-                </span>
-
-                <input
-                    type="number"
-                    id="stock-input-${idx}"
-                    value="${sec.stock}"
-                    min="0"
-                    style="
-                        width:65px;
-                        padding:3px 6px;
-                        background:rgba(255,255,255,0.1);
-                        border:1px solid #ffd700;
-                        color:#fff;
-                        border-radius:4px;
-                        text-align:center;
-                        font-weight:bold;
-                    "
-                >
-
+                <span style="font-size:0.85rem; font-weight:600; color:#ffd700;">${name}</span>
+                <input type="number" id="stock-input-${idx}" value="${sec.stock}" min="0" style="width:65px; padding:3px 6px; background:rgba(0,0,0,0.5); border:1px solid #ffd700; color:#fff; border-radius:4px; text-align:center; font-weight:bold;">
             `;
-
-
             container.appendChild(div);
-
         });
-
     }
-
 
     function openSettingsModal() {
-
-        tempSelectedMode =
-            activeMode;
-
+        tempSelectedMode = activeMode;
         updateSettingsCardUI();
-
         renderStockInputs();
-
-        document.getElementById(
-            'modal-settings'
-        ).style.display = 'flex';
-
+        document.getElementById('modal-settings').style.display = 'flex';
     }
-
 
     function closeSettingsModal() {
-
-        document.getElementById(
-            'modal-settings'
-        ).style.display = 'none';
-
+        document.getElementById('modal-settings').style.display = 'none';
     }
-
 
     function selectMode(mode) {
-
-        tempSelectedMode =
-            mode;
-
+        tempSelectedMode = mode;
         updateSettingsCardUI();
-
     }
-
 
     function updateSettingsCardUI() {
-
-        [
-            'pelajar',
-            'penjawat_awam',
-            'awam'
-        ].forEach(m => {
-
-            const card =
-                document.getElementById(
-                    `card-${m}`
-                );
-
-
+        ['pelajar', 'penjawat_awam', 'awam'].forEach(m => {
+            const card = document.getElementById(`card-${m}`);
             if (m === tempSelectedMode) {
-
                 card.classList.add('active');
-
             } else {
-
                 card.classList.remove('active');
-
             }
-
         });
-
     }
-
 
     function saveSettings() {
-
-        activeMode =
-            tempSelectedMode;
-
-
+        activeMode = tempSelectedMode;
         sectors.forEach((sec, idx) => {
-
-            const input =
-                document.getElementById(
-                    `stock-input-${idx}`
-                );
-
-
+            const input = document.getElementById(`stock-input-${idx}`);
             if (input) {
-
-                sec.stock =
-                    Math.max(
-                        0,
-                        parseInt(input.value) || 0
-                    );
-
+                sec.stock = Math.max(0, parseInt(input.value) || 0);
             }
-
         });
-
-
-        document.getElementById(
-            'modal-settings'
-        ).style.display = 'none';
-
+        document.getElementById('modal-settings').style.display = 'none';
     }
 
-
     function spinWheelAction() {
-
         if (isSpinning) return;
-
-
-        let totalStock =
-            sectors.reduce(
-                (sum, s) =>
-                    sum + s.stock,
-                0
-            );
-
-
+        let totalStock = sectors.reduce((sum, s) => sum + s.stock, 0);
         if (totalStock <= 0) {
-
-            alert(
-                "Semua hadiah telah habis! Sila tambah stok di menu tetapan."
-            );
-
+            alert("Semua hadiah telah habis! Sila tambah stok di menu tetapan.");
             return;
-
         }
 
-
         isSpinning = true;
+        document.getElementById('spin-action-btn').disabled = true;
+        document.getElementById('wheel-container-div').classList.add('spinning');
 
-
-        document.getElementById(
-            'spin-action-btn'
-        ).disabled = true;
-
-
-        document.getElementById(
-            'wheel-container-div'
-        ).classList.add('spinning');
-
-
-        let rand =
-            Math.random() * totalStock;
-
-
+        let rand = Math.random() * totalStock;
         let currentSum = 0;
         let targetIndex = 0;
 
-
-        for (
-            let i = 0;
-            i < sectors.length;
-            i++
-        ) {
-
-            currentSum +=
-                sectors[i].stock;
-
-
+        for (let i = 0; i < sectors.length; i++) {
+            currentSum += sectors[i].stock;
             if (rand <= currentSum) {
-
                 targetIndex = i;
-
                 break;
-
             }
-
         }
 
-
-        if (
-            sectors[targetIndex].stock <= 0
-        ) {
-
-            for (
-                let i = 0;
-                i < sectors.length;
-                i++
-            ) {
-
-                if (
-                    sectors[i].stock > 0
-                ) {
-
+        if (sectors[targetIndex].stock <= 0) {
+            for (let i = 0; i < sectors.length; i++) {
+                if (sectors[i].stock > 0) {
                     targetIndex = i;
-
                     break;
-
                 }
-
             }
-
         }
 
+        selectedPrizeObj = sectors[targetIndex];
+        selectedPrize = `${sectors[targetIndex].line1} ${sectors[targetIndex].line2}`.trim();
 
-        selectedPrizeObj =
-            sectors[targetIndex];
-
-
-        selectedPrize =
-            `${sectors[targetIndex].line1} ${sectors[targetIndex].line2}`.trim();
-
-
-        const extraSpins =
-            6 * 2 * Math.PI;
-
-
-        const targetCenterAngle =
-            targetIndex * arc +
-            arc / 2;
-
-
-        const desiredFinalAngle =
-            -Math.PI / 2 -
-            targetCenterAngle +
-            extraSpins;
-
-
-        const initialAngle =
-            startAngle;
-
-
-        const totalRotationNeeded =
-            desiredFinalAngle -
-            (initialAngle % (2 * Math.PI)) +
-            extraSpins;
-
-
-        const finalAngle =
-            initialAngle +
-            totalRotationNeeded;
-
+        const extraSpins = 6 * 2 * Math.PI;
+        const targetCenterAngle = targetIndex * arc + arc / 2;
+        const desiredFinalAngle = -Math.PI / 2 - targetCenterAngle + extraSpins;
+        const initialAngle = startAngle;
+        const totalRotationNeeded = desiredFinalAngle - (initialAngle % (2 * Math.PI)) + extraSpins;
 
         let startTime = null;
-
         const duration = 4000;
-
         let lastSegmentCheck = 0;
 
-
         function animate(time) {
+            if (!startTime) startTime = time;
+            const progress = Math.min((time - startTime) / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            startAngle = initialAngle + (totalRotationNeeded * easeOut);
 
-            if (!startTime)
-                startTime = time;
+            const currentNormalizedAngle = (2 * Math.PI - (startAngle % (2 * Math.PI))) % (2 * Math.PI);
+            const currentSegment = Math.floor(currentNormalizedAngle / arc);
 
-
-            const progress =
-                Math.min(
-                    (time - startTime) /
-                    duration,
-                    1
-                );
-
-
-            const easeOut =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            startAngle =
-                initialAngle +
-                (totalRotationNeeded *
-                 easeOut);
-
-
-            const currentNormalizedAngle =
-                (
-                    2 * Math.PI -
-                    (startAngle %
-                     (2 * Math.PI))
-                ) %
-                (2 * Math.PI);
-
-
-            const currentSegment =
-                Math.floor(
-                    currentNormalizedAngle /
-                    arc
-                );
-
-
-            if (
-                currentSegment !==
-                lastSegmentCheck
-            ) {
-
+            if (currentSegment !== lastSegmentCheck) {
                 playTickSound();
-
-                lastSegmentCheck =
-                    currentSegment;
-
+                lastSegmentCheck = currentSegment;
             }
-
 
             if (progress < 1) {
-
-                requestAnimationFrame(
-                    animate
-                );
-
+                requestAnimationFrame(animate);
             } else {
-
                 isSpinning = false;
-
-
-                document.getElementById(
-                    'wheel-container-div'
-                ).classList.remove(
-                    'spinning'
-                );
-
-
-                document.getElementById(
-                    'spin-action-btn'
-                ).disabled = false;
-
-
+                document.getElementById('wheel-container-div').classList.remove('spinning');
+                document.getElementById('spin-action-btn').disabled = false;
                 playWinSound();
-
                 showQuizModal();
-
             }
-
         }
-
-
-        requestAnimationFrame(
-            animate
-        );
-
+        requestAnimationFrame(animate);
     }
-
 
     function showQuizModal() {
+        const db = questionsDatabase[activeMode];
+        const randomQ = db[Math.floor(Math.random() * db.length)];
+        currentCorrectAnswer = randomQ.a;
 
-        const db =
-            questionsDatabase[
-                activeMode
-            ];
+        document.getElementById('segment-title').innerText = selectedPrize;
+        document.getElementById('question-text').innerText = randomQ.q;
 
-
-        const randomQ =
-            db[
-                Math.floor(
-                    Math.random() *
-                    db.length
-                )
-            ];
-
-
-        currentCorrectAnswer =
-            randomQ.a;
-
-
-        document.getElementById(
-            'segment-title'
-        ).innerText =
-            selectedPrize;
-
-
-        document.getElementById(
-            'question-text'
-        ).innerText =
-            randomQ.q;
-
-
-        const answersContainer =
-            document.getElementById(
-                'answers-container'
-            );
-
-
+        const answersContainer = document.getElementById('answers-container');
         answersContainer.innerHTML = '';
 
-
         if (randomQ.options) {
-
-            randomQ.options.forEach(
-                opt => {
-
-                    const btn =
-                        document.createElement(
-                            'button'
-                        );
-
-
-                    btn.className =
-                        'ans-btn';
-
-
-                    btn.innerText =
-                        opt;
-
-
-                    btn.onclick =
-                        () =>
-                            checkAnswer(opt);
-
-
-                    answersContainer.appendChild(
-                        btn
-                    );
-
-                }
-            );
-
-        } else {
-
-            ['Ya', 'Tidak'].forEach(
-                ans => {
-
-                    const btn =
-                        document.createElement(
-                            'button'
-                        );
-
-
-                    btn.className =
-                        'ans-btn';
-
-
-                    btn.style.textAlign =
-                        'center';
-
-
-                    btn.style.background =
-                        ans === 'Ya'
-                        ? '#2ed573'
-                        : '#ff4757';
-
-
-                    btn.style.fontSize =
-                        '1.1rem';
-
-
-                    btn.innerText =
-                        ans.toUpperCase();
-
-
-                    btn.onclick =
-                        () =>
-                            checkAnswer(ans);
-
-
-                    answersContainer.appendChild(
-                        btn
-                    );
-
-                }
-            );
-
+            randomQ.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'ans-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                answersContainer.appendChild(btn);
+            });
         }
-
-
-        document.getElementById(
-            'modal-quiz'
-        ).style.display = 'flex';
-
+        document.getElementById('modal-quiz').style.display = 'flex';
     }
-
 
     function checkAnswer(answer) {
-
-        document.getElementById(
-            'modal-quiz'
-        ).style.display = 'none';
-
-
-        if (
-            answer ===
-            currentCorrectAnswer
-        ) {
-
-            document.getElementById(
-                'prize-won'
-            ).innerText =
-                selectedPrize;
-
-
-            document.getElementById(
-                'modal-prize'
-            ).style.display = 'flex';
-
-
+        document.getElementById('modal-quiz').style.display = 'none';
+        if (answer === currentCorrectAnswer) {
+            document.getElementById('prize-won').innerText = selectedPrize;
+            document.getElementById('modal-prize').style.display = 'flex';
             playWinSound();
-
             createConfettiExplosion();
-
         } else {
-
-            document.getElementById(
-                'modal-fail'
-            ).style.display = 'flex';
-
+            document.getElementById('modal-fail').style.display = 'flex';
         }
-
     }
-
 
     function redeemPrize() {
-
-        if (
-            selectedPrizeObj &&
-            selectedPrizeObj.stock > 0
-        ) {
-
+        if (selectedPrizeObj && selectedPrizeObj.stock > 0) {
             selectedPrizeObj.stock -= 1;
-
         }
-
-
-        document.getElementById(
-            'modal-prize'
-        ).style.display = 'none';
-
+        document.getElementById('modal-prize').style.display = 'none';
     }
-
 
     function resetGame() {
-
-        document.getElementById(
-            'modal-prize'
-        ).style.display = 'none';
-
-
-        document.getElementById(
-            'modal-fail'
-        ).style.display = 'none';
-
+        document.getElementById('modal-prize').style.display = 'none';
+        document.getElementById('modal-fail').style.display = 'none';
     }
-
 
     function createConfettiExplosion() {
-
-        const container =
-            document.getElementById(
-                'prize-modal-content'
-            );
-
-
-        for (
-            let i = 0;
-            i < 40;
-            i++
-        ) {
-
-            const confetti =
-                document.createElement(
-                    'div'
-                );
-
-
-            confetti.classList.add(
-                'confetti'
-            );
-
-
-            confetti.style.left =
-                Math.random() * 100 + '%';
-
-
-            confetti.style.top =
-                '50%';
-
-
-            confetti.style.backgroundColor =
-                [
-                    '#ffd700',
-                    '#2ed573',
-                    '#ff4757',
-                    '#ffffff'
-                ][
-                    Math.floor(
-                        Math.random() * 4
-                    )
-                ];
-
-
-            confetti.style.animationDelay =
-                Math.random() * 0.5 + 's';
-
-
-            container.appendChild(
-                confetti
-            );
-
-
-            setTimeout(
-                () =>
-                    confetti.remove(),
-                1500
-            );
-
+        const container = document.getElementById('prize-modal-content');
+        for (let i = 0; i < 40; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '50%';
+            confetti.style.backgroundColor = ['#ffd700', '#ffea75', '#ffffff', '#b8860b'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            container.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 1500);
         }
-
     }
 
-
-    requestAnimationFrame(
-        renderLoop
-    );
-
+    requestAnimationFrame(renderLoop);
 </script>
 
 </body>
