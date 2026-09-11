@@ -8,17 +8,17 @@
 
     <style>
         :root {
-            --wheel-size: 450px; /* Saiz ideal asas untuk desktop */
+            --wheel-size: min(450px, 58vw, calc(100dvh - 290px));
         }
 
 	/* Tablet / iPad */
         @media (max-width: 1024px) {
-            :root { --wheel-size: min(55vw, 55vh); }
+            :root { --wheel-size: min(450px, 54vw, calc(100dvh - 360px)); }
         }
 
 	/* Telefon Bimbit */
-        @media (max-width: 768px) {
-            :root { --wheel-size: 88vw; }
+        @media (max-width: 600px) {
+            :root { --wheel-size: min(88vw, calc(100dvh - 220px)); }
         }
 
 
@@ -48,12 +48,13 @@
             background-attachment: fixed;
             color: #fff;
             min-height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 15px 15px 70px;
-            overflow-x: hidden;
+            padding: 10px 15px 58px;
+            overflow: hidden;
         }
 
         .settings-icon {
@@ -84,6 +85,7 @@
             align-items: center;
             width: 100%;
             max-width: 900px;
+            max-height: 100%;
             text-align: center;
         }
 
@@ -92,14 +94,14 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            gap: 8px; 
-            margin-bottom: 8px; 
+            gap: 5px; 
+            margin-bottom: 4px; 
             width: 100%;
             text-align: center; 
         }
         
         .logo {
-            max-height: clamp(65px, 13vw, 100px);
+            max-height: clamp(42px, 9vh, 78px);
             width: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 12px rgba(255,215,0,0.4));
@@ -116,7 +118,7 @@
         h1 { 
             font-family: 'Rye', serif;
             color: #ffd700; 
-            font-size: clamp(1.6rem, 5vw, 2.4rem); 
+            font-size: clamp(1.35rem, 4.5vw, 2.2rem); 
             text-shadow: 0 0 12px rgba(0,0,0,0.9), 2px 2px 0px #332700; 
             font-weight: 400; 
             letter-spacing: 1px; 
@@ -125,7 +127,7 @@
         }
 
         p {
-            font-size: clamp(1rem, 2.4vw, 1.25rem);
+            font-size: clamp(0.95rem, 2.3vw, 1.15rem);
             color: #e0e0e0;
             margin-bottom: 6px;
             text-shadow: 0 1px 4px rgba(0,0,0,0.9);
@@ -136,7 +138,7 @@
         .wheel-container { 
             position: relative; 
             display: inline-block; 
-            margin: 10px 0 10px 0; 
+            margin: 4px 0 7px 0; 
             width: var(--wheel-size); 
             height: var(--wheel-size); 
         }
@@ -211,8 +213,8 @@
             background: linear-gradient(135deg, #ffd700, #b8860b); 
             color: #111111;
             border: none; 
-            padding: clamp(14px, 2.5vw, 18px) clamp(25px, 4vw, 45px); 
-            font-size: clamp(1.1rem, 2.2vw, 1.35rem); 
+            padding: clamp(10px, 1.8vh, 16px) clamp(22px, 4vw, 45px); 
+            font-size: clamp(0.9rem, 2.2vw, 1.25rem); 
             font-weight: bold; 
             border-radius: 50px;
             cursor: pointer;
@@ -414,6 +416,16 @@
         }
 
         @media (max-width: 600px) {
+            body {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .settings-icon {
+                top: 8px;
+                right: 8px;
+            }
+
             footer {
                 font-size: 0.72rem;
                 padding: 6px 12px;
@@ -607,10 +619,7 @@
     { q: "Akta yang memperuntukkan kesalahan-kesalahan rasuah di Malaysia adalah...", options: ["A. Akta Integriti 2010", "B. Akta Perlindungan Pemberi Rasuah 2009", "C. Akta Suruhanjaya Pencegahan Rasuah Malaysia 2009", "D. Akta Tolak Rasuah 2008"], a: "C. Akta Suruhanjaya Pencegahan Rasuah Malaysia 2009" },
     { q: "Amin rajin belajar, tidak meniru, jujur, dan amanah. Amin merupakan murid yang...", options: ["A. ulat buku", "B. berintegriti", "C. suka menunjuk", "D. ringan tulang"], a: "B. berintegriti" },
     { q: "Lim ketua bola sepak. Guru minta pilih pemain terbaik. Sebagai yang amanah, Lim akan pilih...", options: ["A. Fateh kawan baiknya", "B. Matthew yang menjaringkan gol terbanyak semasa latihan", "C. Kumar yang beri RM100", "D. Hariz anak usahawan malas latihan"], a: "B. Matthew yang menjaringkan gol terbanyak semasa latihan" },
-    { q: "Pilih kesan negatif akibat jenayah rasuah: I. Berlaku kenaikan harga barang, II. Pelaku didenda dan dipenjara, III. Keluarga dipandang bangga, IV. Harta disita.", options: ["A. I dan II", "B. III dan IV", "C. I, III dan IV", "D. I, II dan IV"], a: "D. I, II dan IV" },
-    { q: "Siapakah yang boleh terlibat dengan jenayah rasuah? I. Guru, II. Ahli korporat, III. Pelajar, IV. Pegawai kerajaan", options: ["A. I dan II", "B. III dan IV", "C. I, III dan IV", "D. Semua di atas"], a: "D. Semua di atas" },
     { q: "Andrew dipenjarakan kerana rasuah. Apakah kesan tindakan itu ke atas keluarganya?", options: ["A. Keluarga Andrew menjadi terkenal", "B. Keluarga Andrew lebih dihormati", "C. Keluarga Andrew dipandang hina", "D. Pendapatan keluarga bertambah baik"], a: "C. Keluarga Andrew dipandang hina" },
-    { q: "Kesalahan rasuah di bawah Akta SPRM 2009 adalah... I. Meminta/menerima, II. Menawar/memberi, III. Tuntutan palsu, IV. Salah guna kuasa", options: ["A. I dan II", "B. III dan IV", "C. I, III dan IV", "D. Semua di atas"], a: "D. Semua di atas" },
     { q: "Kamis cuba memberi rasuah RM50 kepada polis kerana tidak pakai tali pinggang keledar. Apakah kesalahan beliau di bawah Akta SPRM 2009?", options: ["A. Menawar dan memberi rasuah (Seksyen 17(b))", "B. Meminta dan menerima", "C. Membuat tuntutan palsu", "D. Salah guna kuasa sahaja"], a: "A. Menawar dan memberi rasuah (Seksyen 17(b))" },
     { q: "Jika Kamis didapati bersalah kerana memberi rasuah, apakah bentuk hukuman denda maksimum asas di bawah akta?", options: ["A. Denda RM100", "B. Denda 5x nilai suapan atau RM10,000 mengikut mana lebih tinggi berserta penjara", "C. Denda tetap RM100 sahaja", "D. Lepas bebas"], a: "B. Denda 5x nilai suapan atau RM10,000 mengikut mana lebih tinggi berserta penjara" },
     { q: "Apakah peranan agensi SPRM?", options: ["A. Memajukan industri pertanian", "B. Mencegah dan membanteras rasuah", "C. Mengusahakan penternakan", "D. Memberi bantuan modal usahawan"], a: "B. Mencegah dan membanteras rasuah" },
